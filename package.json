@@ -1,0 +1,19 @@
+{
+  "name": "default-devlopment",
+  "version": "1.0.0",
+  "description": "Rudimentary setup for projects",
+  "main": "index.js",
+  "scripts": {
+    "test": "jest",
+    "build": "webpack",
+    "start": "webpack serve --open"
+  },
+  "author": "sty6x",
+  "license": "ISC",
+  "devDependencies": {
+    "html-webpack-plugin": "^5.5.0",
+    "webpack": "^5.75.0",
+    "webpack-cli": "^5.0.0",
+    "webpack-dev-server": "^4.11.1"
+  }
+}
