@@ -1,2 +1,2 @@
-# default-development-environment
-Default development environment for future incoming projects
+# Battle Ship Project
+The purpose of this project is for me to learn how to use jest or just testing in general. in this project i will learn about unit testing, mocking, and how to and when to mock.
