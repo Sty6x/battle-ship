@@ -8,14 +8,14 @@ export class Players {
   }
   #createShipDock(ship, playerShips) {
     for (let i = 0; i < playerShips.length; i++) {
-      this.shipDock.push(new ship(playerShips[i]))
+      this.shipDock.push(new ship(playerShips[i],i))
     }
     return this.shipDock
   }
   //removeShip should subsribe to isSunk
   removeShip(shipData) {
     for (let i = 0; i < this.shipDock.length; i++) {
-      if (shipData == this.shipDock[i]) {
+      if (shipData.id == this.shipDock[i].id) {
         let shipIndex = this.shipDock.indexOf(shipData)
         let removedShip = this.shipDock.pop(shipIndex) 
         console.log(removedShip)
@@ -26,10 +26,11 @@ export class Players {
 }
 
 export class Ships {
-  constructor(cells) {
+  constructor(cells,id) {
     this.cellArr = []
     this.hit = 0;
     this.#createShip(cells)
+    this.id = id
   }
 
   #createShip(cells) {

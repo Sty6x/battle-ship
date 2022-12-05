@@ -70,12 +70,12 @@ describe('isHit receiving receiveAttack from game board that returns a cell that
     let cells = 6
     document.body.innerHTML =
       `<div class='ship-cell' id='ship-6-4'></div>`
-    let testCell = document.querySelector('.ship-cell')
+    let targetCell = document.querySelector('.ship-cell')
     let expectedCell = document.querySelector('.ship-cell')
     expectedCell.classList.replace('ship-cell', 'destroyed-cell')
     let ship = new Ships(cells)
 
-    expect(ship.isHit(testCell)).toEqual(expectedCell)
+    expect(ship.isHit(targetCell)).toEqual(expectedCell)
   })
 
 
@@ -83,12 +83,12 @@ describe('isHit receiving receiveAttack from game board that returns a cell that
     let cells = 4
     document.body.innerHTML =
       `<div class='ship-cell' id='ship-4-1'></div>`
-    let testCell = document.querySelector('.ship-cell')
+    let targetCell = document.querySelector('.ship-cell')
     let expectedCell = document.querySelector('.ship-cell')
     expectedCell.classList.replace('ship-cell', 'destroyed-cell')
     let ship = new Ships(cells)
 
-    expect(ship.isHit(testCell)).toEqual(expectedCell)
+    expect(ship.isHit(targetCell)).toEqual(expectedCell)
   })
 
 
@@ -96,12 +96,12 @@ describe('isHit receiving receiveAttack from game board that returns a cell that
     let cells = 2
     document.body.innerHTML =
       `<div class='ship-cell' id='ship-2-0'></div>`
-    let testCell = document.querySelector('.ship-cell')
+    let targetCell = document.querySelector('.ship-cell')
     let expectedCell = document.querySelector('.ship-cell')
     expectedCell.classList.replace('ship-cell', 'destroyed-cell')
     let ship = new Ships(cells)
 
-    expect(ship.isHit(testCell)).toEqual(expectedCell)
+    expect(ship.isHit(targetCell)).toEqual(expectedCell)
   })
 
 })
@@ -111,18 +111,18 @@ describe('isHit receives nothing and returns nothing or if an id doesnt belong t
   test('should return an error ', () => {
     document.body.innerHTML =
       `<div class='ship-cell' id='ship-2-0'></div>`
-    let testCell = document.querySelector('.ship-cell')
+    let targetCell = document.querySelector('.ship-cell')
     let ship = new Ships(cells)
-    expect(ship.isHit(testCell)).toEqual('not a cell or type of class ship')
+    expect(ship.isHit(targetCell)).toEqual('not a cell or type of class ship')
   })
 
 
-  test('should return an error', () => {
+  test('should return an error ', () => {
     document.body.innerHTML =
       `<div class='ship-cell' id='ship-1-0'></div>`
-    let testCell = document.querySelector('.ship-cell')
+    let targetCell = document.querySelector('.ship-cell')
     let ship = new Ships(cells)
-    expect(ship.isHit(testCell)).toEqual('not a cell or type of class ship')
+    expect(ship.isHit(targetCell)).toEqual('not a cell or type of class ship')
   })
 })
 
@@ -131,26 +131,26 @@ describe('increment hit property when isHit() is called', () => {
   let cells = 6
   document.body.innerHTML =
     `<div class='ship-cell' id='ship-6-0'></div>`
-  let testCell = document.querySelector('.ship-cell')
+  let targetCell = document.querySelector('.ship-cell')
 
   test('hit should return 1', () => {
     let ship = new Ships(cells)
-    ship.isHit(testCell)
+    ship.isHit(targetCell)
     expect(ship.hit).toBe(1)
   })
 
   test('hit should return 2', () => {
     let ship = new Ships(cells)
-    ship.isHit(testCell)
-    ship.isHit(testCell)
+    ship.isHit(targetCell)
+    ship.isHit(targetCell)
     expect(ship.hit).toBe(2)
   })
 
   test('hit should return 3', () => {
     let ship = new Ships(cells)
-    ship.isHit(testCell)
-    ship.isHit(testCell)
-    ship.isHit(testCell)
+    ship.isHit(targetCell)
+    ship.isHit(targetCell)
+    ship.isHit(targetCell)
     expect(ship.hit).toBe(3)
   })
 })
@@ -177,11 +177,27 @@ describe('when hit is true then change the target cells class to destroyed-cell'
   let cells = 6
   document.body.innerHTML =
     `<div class='ship-cell' id='ship-6-3'></div>`
-  let testCell = document.querySelector('.ship-cell')
+  let targetCell = document.querySelector('.ship-cell')
 
   test('node should change class to destroyed cell', () => {
     let ship = new Ships(cells)
-    ship.isHit(testCell)
-    expect(ship.changeClass(testCell)).toEqual('destroyed-cell')
+    ship.isHit(targetCell)
+    expect(ship.changeClass(targetCell)).toEqual('destroyed-cell')
   })
+})
+
+
+describe('Removing ship from ship dock when isSunk returns true', () => {
+  let shipArray = [6, 5, 4, 3, 2, 2]
+  let p1 = new Players(Ships, shipArray)
+  let ship2 = p1.shipDock[1] // should be [5]
+  console.log(ship2)
+  test.only('should remove the 2nd ship', () => {
+    expect(p1.removeShip(ship2)).toEqual(ship2)})
+
+  let ship1 = p1.shipDock[0]
+  test('should remove the 1st ship', () => {
+    expect(p1.removeShip(ship1)).toEqual(ship1)})
+
+
 })
