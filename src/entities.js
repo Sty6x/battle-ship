@@ -15,19 +15,20 @@ export class Players {
 export class Ships {
   constructor(cells) {
     this.cellArr = []
-    this.#createShip(cells)
     this.hit = 0;
+    this.#createShip(cells)
   }
   
   #createShip(cells) {
     for (let i = 0; i < cells; i++) {
       let cell = document.createElement('div')
+      cell.setAttribute('class','ship-cell')
+      cell.setAttribute('id',`ship-${cells}-${i}`)
       this.cellArr.push(cell)
-      this.cellArr[i].setAttribute('class','ship-cell')
-      this.cellArr[i].setAttribute('id',`ship-${cells}-${i}`)
     }
   }
   isHit(rCell) {
+    console.log(this.cellArr[0].id)
     for (let i = 0; i < this.cellArr.length; i++) {
       if (rCell.id == this.cellArr[i].id) {
         this.hit++;

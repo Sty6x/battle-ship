@@ -65,25 +65,29 @@ describe('Creating ship cells when ship object is instantiated', () => {
 })
 
 describe('isHit receiving receiveAttack from game board that returns a cell', () => {
-  let cell = 6
 
-  test.only('receives a cell of id-5', () => {
-    const html = '' +
-      '<!DOCTYPE html>' +
-      '<html>' +
-      '<head>' +
-      '<title>Blank</title>' +
-      '</head>' +
-      '<body>' +
-      `<div class="ship-cell"> </div>` +
-      '</body>' +
-      '</html>'
-    let rt = document.querySelector('.ship-cell')
+  test('receives a cell of id-6-4', () => {
+    let cell = 6
+    document.body.innerHTML =
+      `<div class='ship-cell' id='ship-6-4'></div>`
+    let testCell = document.querySelector('.ship-cell')
+    console.log(testCell.id)
     let ship = new Ships(cell)
-    console.log(ship.cellArr)
-    expect(ship.isHit(rt)).toEqual(rt)
+
+    expect(ship.isHit(testCell)).toEqual(testCell)
   })
 
+
+  test('receives a cell of id-4-1', () => {
+    let cell = 4 
+    document.body.innerHTML =
+      `<div class='ship-cell' id='ship-4-1'></div>`
+    let testCell = document.querySelector('.ship-cell')
+    console.log(testCell.id)
+    let ship = new Ships(cell)
+
+    expect(ship.isHit(testCell)).toEqual(testCell)
+  })
 })
 
 // describe('isHit receives nothing then return nothing',()=>{
