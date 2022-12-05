@@ -1,12 +1,124 @@
-import {Players} from '../entities.js'
+import { Players, Ships } from '../entities.js'
 
-test('instantiates 6 ships',()=>{
-  class Ships {
-    constructor(cells){
-      this.id = cells
-      this.isShip = true;
+describe('Creating Ships when player object is instantiated', () => {
+
+  test('instantiates 6 ships', () => {
+    let shipArray = [6, 5, 4, 3, 2, 2]
+    class Ships {
+      constructor(cells) {
+        this.id = cells
+        this.isShip = true;
+      }
     }
-  }
-  let p1 =  new Players(Ships)
-  expect(p1.shipDock).toEqual([{id:6, isShip:true},{id:5,isShip:true}])
+    let p1 = new Players(Ships, shipArray)
+    expect(p1.shipDock).toEqual([{ id: 6, isShip: true }, { id: 5, isShip: true },
+    { id: 4, isShip: true }, { id: 3, isShip: true },
+    { id: 2, isShip: true }, { id: 2, isShip: true }
+    ])
+  })
+
+  test('instantiates 3 ships', () => {
+    let shipArray = [6, 5, 4]
+    class Ships {
+      constructor(cells) {
+        this.id = cells
+        this.isShip = true;
+      }
+    }
+    let p1 = new Players(Ships, shipArray)
+    expect(p1.shipDock).toEqual([{ id: 6, isShip: true }, { id: 5, isShip: true },
+    { id: 4, isShip: true }])
+  })
+
+  test('instantiates 1 ships', () => {
+    let shipArray = [6]
+    class Ships {
+      constructor(cells) {
+        this.id = cells
+        this.isShip = true;
+      }
+    }
+    let p1 = new Players(Ships, shipArray)
+    expect(p1.shipDock).toEqual([{ id: 6, isShip: true }])
+  })
 })
+
+describe('Creating ship cells when ship object is instantiated', () => {
+
+  test('Creates cells depending on the # that was passed in: 1', () => {
+    let shipArray = 6
+    let ship = new Ships(shipArray)
+    expect(ship.cellArr.length).toEqual(6)
+  })
+
+  test('Creates cells depending on the # that was passed in: 1', () => {
+    let shipArray = 3
+    let ship = new Ships(shipArray)
+    expect(ship.cellArr.length).toEqual(3)
+  })
+
+  test('Creates cells depending on the # that was passed in: 1', () => {
+    let shipArray = 1
+    let ship = new Ships(shipArray)
+    expect(ship.cellArr.length).toEqual(1)
+  })
+})
+
+describe('isHit receiving receiveAttack from game board that returns a cell', () => {
+  let cell = 6
+
+  test.only('receives a cell of id-5', () => {
+    const html = '' +
+      '<!DOCTYPE html>' +
+      '<html>' +
+      '<head>' +
+      '<title>Blank</title>' +
+      '</head>' +
+      '<body>' +
+      `<div class="ship-cell"> </div>` +
+      '</body>' +
+      '</html>'
+    let rt = document.querySelector('.ship-cell')
+    let ship = new Ships(cell)
+    console.log(ship.cellArr)
+    expect(ship.isHit(rt)).toEqual(rt)
+  })
+
+})
+
+// describe('isHit receives nothing then return nothing',()=>{
+//   let cell = 6
+//   test('should return an error', ()=>{
+//     let rt = {}
+//     let ship = new Ships(cell)
+//     expect(ship.isHit(rt)).toEqual('not a cell or type of class ship')
+//   })
+// })
+
+
+// describe('increment hit property when isHit() is called',()=>{
+//   let cell = 6
+//   test('hit should return 1', ()=>{
+//     let rt = {id:1}
+//     let ship = new Ships(cell)
+//     ship.isHit(rt)
+//     expect(ship.hit).toBe(1)
+//   })
+//   
+//   test('hit should return 2', ()=>{
+//     let rt = {id:1}
+//     let ship = new Ships(cell)
+//     ship.isHit(rt)
+//     ship.isHit(rt)
+//     expect(ship.hit).toBe(2)
+//   })
+
+//    test('hit should return 3', ()=>{
+//     let rt = {id:1}
+//     let ship = new Ships(cell)
+//     ship.isHit(rt)
+//     ship.isHit(rt)
+//     ship.isHit(rt)
+//     expect(ship.hit).toBe(3)
+//   })
+// })
