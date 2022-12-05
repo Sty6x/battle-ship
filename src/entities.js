@@ -28,16 +28,20 @@ export class Ships {
     }
   }
   isHit(rCell) {
-    console.log(this.cellArr[0].id)
     for (let i = 0; i < this.cellArr.length; i++) {
       if (rCell.id == this.cellArr[i].id) {
         this.hit++;
+        this.isSunk(this.hit)
         return this.cellArr[i]
       }
     }
     return 'not a cell or type of class ship'
   }
   isSunk(hit){
-    (hit === this.cellArr.length) ? this : null
+    if(hit == this.cellArr.length){
+      console.log(this)
+      return true
+    }
+    return false
   }
 }
