@@ -64,7 +64,7 @@ describe('Creating ship cells when ship object is instantiated', () => {
   })
 })
 
-describe('isHit receiving receiveAttack from game board that returns a cell', () => {
+describe('isHit receiving receiveAttack from game board that returns a cell that was hit', () => {
 
   test('receives a cell of id-6-4', () => {
     let cell = 6
@@ -88,16 +88,40 @@ describe('isHit receiving receiveAttack from game board that returns a cell', ()
 
     expect(ship.isHit(testCell)).toEqual(testCell)
   })
+
+
+  test('receives a cell of id-2-0', () => {
+    let cell = 2 
+    document.body.innerHTML =
+      `<div class='ship-cell' id='ship-2-0'></div>`
+    let testCell = document.querySelector('.ship-cell')
+    console.log(testCell.id)
+    let ship = new Ships(cell)
+
+    expect(ship.isHit(testCell)).toEqual(testCell)
+  })
+
 })
 
-// describe('isHit receives nothing then return nothing',()=>{
-//   let cell = 6
-//   test('should return an error', ()=>{
-//     let rt = {}
-//     let ship = new Ships(cell)
-//     expect(ship.isHit(rt)).toEqual('not a cell or type of class ship')
-//   })
-// })
+describe('isHit receives nothing then return nothing if an id doesnt belong to any of the cell of the ship',()=>{
+  let cell = 6
+  test('should return an error ', ()=>{
+    document.body.innerHTML =
+      `<div class='ship-cell' id='ship-2-0'></div>`
+    let testCell = document.querySelector('.ship-cell')
+    let ship = new Ships(cell)
+    expect(ship.isHit(testCell)).toEqual('not a cell or type of class ship')
+  })
+
+
+  test('should return an error', ()=>{
+    document.body.innerHTML =
+      `<div class='ship-cell' id='ship-1-0'></div>`
+    let testCell = document.querySelector('.ship-cell')
+    let ship = new Ships(cell)
+    expect(ship.isHit(testCell)).toEqual('not a cell or type of class ship')
+  })
+})
 
 
 // describe('increment hit property when isHit() is called',()=>{

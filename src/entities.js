@@ -37,4 +37,7 @@ export class Ships {
     }
     return 'not a cell or type of class ship'
   }
+  isSunk(hit){
+    (hit === this.cellArr.length) ? this : null
+  }
 }
