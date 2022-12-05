@@ -45,13 +45,13 @@ describe('Creating Ships when player object is instantiated', () => {
 
 describe('Creating ship cells when ship object is instantiated', () => {
 
-  test('Creates cells depending on the # that was passed in: 1', () => {
+  test('Creates cells depending on the # that was passed in: 6', () => {
     let shipArray = 6
     let ship = new Ships(shipArray)
     expect(ship.cellArr.length).toEqual(6)
   })
 
-  test('Creates cells depending on the # that was passed in: 1', () => {
+  test('Creates cells depending on the # that was passed in: 3', () => {
     let shipArray = 3
     let ship = new Ships(shipArray)
     expect(ship.cellArr.length).toEqual(3)
@@ -71,9 +71,11 @@ describe('isHit receiving receiveAttack from game board that returns a cell that
     document.body.innerHTML =
       `<div class='ship-cell' id='ship-6-4'></div>`
     let testCell = document.querySelector('.ship-cell')
+    let expectedCell = document.querySelector('.ship-cell')
+    expectedCell.classList.replace('ship-cell', 'destroyed-cell')
     let ship = new Ships(cells)
 
-    expect(ship.isHit(testCell)).toEqual(testCell)
+    expect(ship.isHit(testCell)).toEqual(expectedCell)
   })
 
 
@@ -82,9 +84,11 @@ describe('isHit receiving receiveAttack from game board that returns a cell that
     document.body.innerHTML =
       `<div class='ship-cell' id='ship-4-1'></div>`
     let testCell = document.querySelector('.ship-cell')
+    let expectedCell = document.querySelector('.ship-cell')
+    expectedCell.classList.replace('ship-cell', 'destroyed-cell')
     let ship = new Ships(cells)
 
-    expect(ship.isHit(testCell)).toEqual(testCell)
+    expect(ship.isHit(testCell)).toEqual(expectedCell)
   })
 
 
@@ -93,9 +97,11 @@ describe('isHit receiving receiveAttack from game board that returns a cell that
     document.body.innerHTML =
       `<div class='ship-cell' id='ship-2-0'></div>`
     let testCell = document.querySelector('.ship-cell')
+    let expectedCell = document.querySelector('.ship-cell')
+    expectedCell.classList.replace('ship-cell', 'destroyed-cell')
     let ship = new Ships(cells)
 
-    expect(ship.isHit(testCell)).toEqual(testCell)
+    expect(ship.isHit(testCell)).toEqual(expectedCell)
   })
 
 })
@@ -152,16 +158,30 @@ describe('increment hit property when isHit() is called', () => {
 describe('Check isSunk if it returns the object', () => {
 
   test('should return true if hit is equal to the length of the shipCells array', () => {
-  let hit =6 
-  let cells =6 
-  let ship = new Ships(cells)
+    let hit = 6
+    let cells = 6
+    let ship = new Ships(cells)
     expect(ship.isSunk(hit)).toBeTruthy()
   })
 
   test('should return false if hit is NOT equal to the length of the shipCells array', () => {
-  let hit =3 
-  let cells =6 
-  let ship = new Ships(cells)
+    let hit = 3
+    let cells = 6
+    let ship = new Ships(cells)
     expect(ship.isSunk(hit)).toBeFalsy()
+  })
+})
+
+
+describe('when hit is true then change the target cells class to destroyed-cell', () => {
+  let cells = 6
+  document.body.innerHTML =
+    `<div class='ship-cell' id='ship-6-3'></div>`
+  let testCell = document.querySelector('.ship-cell')
+
+  test('node should change class to destroyed cell', () => {
+    let ship = new Ships(cells)
+    ship.isHit(testCell)
+    expect(ship.changeClass(testCell)).toEqual('destroyed-cell')
   })
 })
