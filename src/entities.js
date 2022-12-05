@@ -39,7 +39,7 @@ export class Ships {
   }
   isSunk(hit){
     if(hit == this.cellArr.length){
-      console.log(this)
+      // change to return this instead of true
       return true
     }
     return false

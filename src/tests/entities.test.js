@@ -67,33 +67,33 @@ describe('Creating ship cells when ship object is instantiated', () => {
 describe('isHit receiving receiveAttack from game board that returns a cell that was hit', () => {
 
   test('receives a cell of id-6-4', () => {
-    let cell = 6
+    let cells = 6
     document.body.innerHTML =
       `<div class='ship-cell' id='ship-6-4'></div>`
     let testCell = document.querySelector('.ship-cell')
-    let ship = new Ships(cell)
+    let ship = new Ships(cells)
 
     expect(ship.isHit(testCell)).toEqual(testCell)
   })
 
 
   test('receives a cell of id-4-1', () => {
-    let cell = 4
+    let cells = 4
     document.body.innerHTML =
       `<div class='ship-cell' id='ship-4-1'></div>`
     let testCell = document.querySelector('.ship-cell')
-    let ship = new Ships(cell)
+    let ship = new Ships(cells)
 
     expect(ship.isHit(testCell)).toEqual(testCell)
   })
 
 
   test('receives a cell of id-2-0', () => {
-    let cell = 2
+    let cells = 2
     document.body.innerHTML =
       `<div class='ship-cell' id='ship-2-0'></div>`
     let testCell = document.querySelector('.ship-cell')
-    let ship = new Ships(cell)
+    let ship = new Ships(cells)
 
     expect(ship.isHit(testCell)).toEqual(testCell)
   })
@@ -101,12 +101,12 @@ describe('isHit receiving receiveAttack from game board that returns a cell that
 })
 
 describe('isHit receives nothing and returns nothing or if an id doesnt belong to any of the cell of the ship', () => {
-  let cell = 6
+  let cells = 6
   test('should return an error ', () => {
     document.body.innerHTML =
       `<div class='ship-cell' id='ship-2-0'></div>`
     let testCell = document.querySelector('.ship-cell')
-    let ship = new Ships(cell)
+    let ship = new Ships(cells)
     expect(ship.isHit(testCell)).toEqual('not a cell or type of class ship')
   })
 
@@ -115,33 +115,33 @@ describe('isHit receives nothing and returns nothing or if an id doesnt belong t
     document.body.innerHTML =
       `<div class='ship-cell' id='ship-1-0'></div>`
     let testCell = document.querySelector('.ship-cell')
-    let ship = new Ships(cell)
+    let ship = new Ships(cells)
     expect(ship.isHit(testCell)).toEqual('not a cell or type of class ship')
   })
 })
 
 
 describe('increment hit property when isHit() is called', () => {
-  let cell = 6
+  let cells = 6
   document.body.innerHTML =
     `<div class='ship-cell' id='ship-6-0'></div>`
   let testCell = document.querySelector('.ship-cell')
 
   test('hit should return 1', () => {
-    let ship = new Ships(cell)
+    let ship = new Ships(cells)
     ship.isHit(testCell)
     expect(ship.hit).toBe(1)
   })
 
   test('hit should return 2', () => {
-    let ship = new Ships(cell)
+    let ship = new Ships(cells)
     ship.isHit(testCell)
     ship.isHit(testCell)
     expect(ship.hit).toBe(2)
   })
 
   test('hit should return 3', () => {
-    let ship = new Ships(cell)
+    let ship = new Ships(cells)
     ship.isHit(testCell)
     ship.isHit(testCell)
     ship.isHit(testCell)
@@ -149,12 +149,19 @@ describe('increment hit property when isHit() is called', () => {
   })
 })
 
-describe('Check isSunk if it returns the object and null if not', () => {
-  let hit = 5
-  let cell = 5
-  let ship = new Ships(cell)
-  test('should return true if hit is equal to the length of the shipCells array', () => {
+describe('Check isSunk if it returns the object', () => {
 
+  test('should return true if hit is equal to the length of the shipCells array', () => {
+  let hit =6 
+  let cells =6 
+  let ship = new Ships(cells)
     expect(ship.isSunk(hit)).toBeTruthy()
+  })
+
+  test('should return false if hit is NOT equal to the length of the shipCells array', () => {
+  let hit =3 
+  let cells =6 
+  let ship = new Ships(cells)
+    expect(ship.isSunk(hit)).toBeFalsy()
   })
 })
