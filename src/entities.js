@@ -16,6 +16,7 @@ export class Players {
   removeShip(shipData) {
     for (let i = 0; i < this.shipDock.length; i++) {
       if (shipData == this.shipDock[i]) {
+        // no need to loop just grab the ship index and remove it from the shipDock
         let shipIndex = this.shipDock.indexOf(shipData)
         let removedShip = this.shipDock.pop(shipIndex) 
         console.log(removedShip)
