@@ -2,44 +2,19 @@ import { Players, Ships } from '../entities.js'
 
 describe('Creating Ships when player object is instantiated', () => {
 
-  test('instantiates 6 ships', () => {
-    let shipArray = [6, 5, 4, 3, 2, 2]
+  test.only('instantiates 6 ships', () => {
     class Ships {
       constructor(cells) {
         this.id = cells
         this.isShip = true;
       }
     }
-    let p1 = new Players(Ships, shipArray)
+    
+    let p1 = new Players(Ships)
     expect(p1.shipDock).toEqual([{ id: 6, isShip: true }, { id: 5, isShip: true },
     { id: 4, isShip: true }, { id: 3, isShip: true },
     { id: 2, isShip: true }, { id: 2, isShip: true }
     ])
-  })
-
-  test('instantiates 3 ships', () => {
-    let shipArray = [6, 5, 4]
-    class Ships {
-      constructor(cells) {
-        this.id = cells
-        this.isShip = true;
-      }
-    }
-    let p1 = new Players(Ships, shipArray)
-    expect(p1.shipDock).toEqual([{ id: 6, isShip: true }, { id: 5, isShip: true },
-    { id: 4, isShip: true }])
-  })
-
-  test('instantiates 1 ships', () => {
-    let shipArray = [6]
-    class Ships {
-      constructor(cells) {
-        this.id = cells
-        this.isShip = true;
-      }
-    }
-    let p1 = new Players(Ships, shipArray)
-    expect(p1.shipDock).toEqual([{ id: 6, isShip: true }])
   })
 })
 

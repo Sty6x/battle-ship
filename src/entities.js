@@ -1,10 +1,11 @@
 import { PubSub } from 'pubsub-js'
 
 export class Players {
-  constructor(ship, shipArr) {
+  constructor(ship) {
     this.shipDock = []
     this.ship = ship
-    this.#createShipDock(this.ship, shipArr)
+    this.shipArr = [6,5,4,3,2,2]
+    this.#createShipDock(this.ship, this.shipArr)
   }
   #createShipDock(ship, playerShips) {
     for (let i = 0; i < playerShips.length; i++) {
