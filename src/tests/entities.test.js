@@ -191,12 +191,17 @@ describe('Removing ship from ship dock when isSunk is true and publishes the obj
   let shipArray = [6, 5, 4, 3, 2, 2]
   let p1 = new Players(Ships, shipArray)
   let ship2 = p1.shipDock[1] // should be [5]
-  console.log(ship2)
-  test.only('should remove the 2nd ship', () => {
-    expect(p1.removeShip(ship2)).toEqual(ship2)})
+  test('should remove the 2nd ship', () => {
+    expect(p1.removeShip(ship2)).toEqual(ship2)
+  })
 
   let ship1 = p1.shipDock[0]
   test('should remove the 1st ship', () => {
-    expect(p1.removeShip(ship1)).toEqual(ship1)})
+    expect(p1.removeShip(ship1)).toEqual(ship1)
+  })
 
+  let ship3 = p1.shipDock[2]
+  test('should remove the 3rd ship', () => {
+    expect(p1.removeShip(ship3)).toEqual(ship3)
+  })
 })
