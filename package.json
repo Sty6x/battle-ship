@@ -1,8 +1,8 @@
 {
-  "name": "default-devlopment",
+  "name": "Battle Ship",
   "version": "1.0.0",
-  "description": "Rudimentary setup for projects",
-  "main": "index.js",
+  "description": "",
+  "main": "app.js",
   "scripts": {
     "test": "jest",
     "build": "webpack",

@@ -14,12 +14,12 @@ export class Players {
   }
   //removeShip should subsribe to isSunk
   removeShip(shipData) {
-        let shipIndex = this.shipDock.indexOf(shipData)
-        let spliced = this.shipDock.splice(shipIndex,1)
-        const sunkenShip = spliced.pop()
-        return sunkenShip
-    }
+    let shipIndex = this.shipDock.indexOf(shipData)
+    let spliced = this.shipDock.splice(shipIndex, 1)
+    const sunkenShip = spliced.pop()
+    return sunkenShip
   }
+}
 
 export class Ships {
   constructor(cells) {
