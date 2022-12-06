@@ -14,17 +14,12 @@ export class Players {
   }
   //removeShip should subsribe to isSunk
   removeShip(shipData) {
-    for (let i = 0; i < this.shipDock.length; i++) {
-      if (shipData == this.shipDock[i]) {
-        // no need to loop just grab the ship index and remove it from the shipDock
         let shipIndex = this.shipDock.indexOf(shipData)
-        let removedShip = this.shipDock.pop(shipIndex) 
-        console.log(removedShip)
-        return removedShip
-      }
+        let spliced = this.shipDock.splice(shipIndex,1)
+        const sunkenShip = spliced.pop()
+        return sunkenShip
     }
   }
-}
 
 export class Ships {
   constructor(cells) {
@@ -54,7 +49,7 @@ export class Ships {
   }
   isSunk(hit) {
     if (hit == this.cellArr.length) {
-      PubSub.publish('sinked cell', this)
+      PubSub.publish('shipSunk', this)
       return true
     }
     return false

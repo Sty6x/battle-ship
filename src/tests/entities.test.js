@@ -187,7 +187,7 @@ describe('when hit is true then change the target cells class to destroyed-cell'
 })
 
 
-describe('Removing ship from ship dock when isSunk returns true', () => {
+describe('Removing ship from ship dock when isSunk is true and publishes the object"s "this"', () => {
   let shipArray = [6, 5, 4, 3, 2, 2]
   let p1 = new Players(Ships, shipArray)
   let ship2 = p1.shipDock[1] // should be [5]
@@ -198,6 +198,5 @@ describe('Removing ship from ship dock when isSunk returns true', () => {
   let ship1 = p1.shipDock[0]
   test('should remove the 1st ship', () => {
     expect(p1.removeShip(ship1)).toEqual(ship1)})
-
 
 })
