@@ -1,8 +1,6 @@
-
+import PubSub from "pubsub-js"
 export class GameBoard {
-  constructor(x, y) {
-    this.gridx = x;
-    this.gridy = y;
+  constructor() {
     this.playersArr = []
   }
 
@@ -12,7 +10,14 @@ export class GameBoard {
     }
     return this.playersArr
   }
-
+  receiveAttack(targetCell) {
+    if (targetCell.classList.contains('ship-cell')) {
+      PubSub.publish("Target Cell", targetCell)
+      return targetCell
+    } else {
+      return null
+    }
+  }
   createBoard(gridx, gridy) {
     let gridArr = []
     for (let i = 0; i < gridx; i++) {
@@ -24,5 +29,26 @@ export class GameBoard {
     }
     return gridArr
   }
+  evalPlayers() {
+    let player;
+    if (this.playersArr[0].shipDock.length == 0) {
+      player = 2
+      this.getWinner(player)
+      return player
+    } else if(this.playersArr[1].shipDock.length == 0){
+      player = 1
+      this.getWinner(player)
+      return player
+    }else {
+      return 'continue game'
+    }
+  }
 
+  // make getWinner method grab the element it wants to append to 
+  getWinner(player){
+    let winner = document.createElement('p')
+    winner.setAttribute('class','winner')
+    winner.textContent = `Player ${player} Wins`
+    return winner.textContent
+  }
 }
