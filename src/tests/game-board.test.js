@@ -46,7 +46,20 @@ describe('Creating Board with passed in gridx and gridy', () => {
   test('gameBoard should be 25', () => {
     expect(board.createBoard(5, 5).length).toBe(25)
   })
+  test('displays 100 divs of class grid', () => {
+    let gridArr = board.createBoard(10, 10)
+    document.body.innerHTML =
+      `<div class='grid-container'></div>`
 
+    let displayGrid = (arr) => {
+      let gridContainer = document.querySelector('.grid-container')
+      for (let i = 0; i < arr.length; i++) {
+        gridContainer.appendChild(arr[i])
+      }
+      return gridContainer
+    }
+    expect(displayGrid(gridArr).children.length).toEqual(100)
+  })
 })
 
 describe('Evaluating Each Players array', () => {
@@ -67,6 +80,10 @@ describe('Evaluating Each Players array', () => {
     expect(board.evalPlayers()).toEqual(2)
   })
 
+  test.only('should return player 1 wins', () => {
+    board.playersArr[1].shipDock = []
+    expect(board.evalPlayers()).toEqual(1)
+  })
 })
 
 describe('Calls the Winner of the Game', () => {

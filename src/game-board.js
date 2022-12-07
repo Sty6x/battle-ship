@@ -35,17 +35,17 @@ export class GameBoard {
       player = 2
       this.getWinner(player)
       return player
-    } else if(this.playersArr[1].shipDock.length == 0){
+    }
+    if (this.playersArr[1].shipDock.length == 0) {
       player = 1
       this.getWinner(player)
       return player
-    }else {
+    } else {
       return 'continue game'
     }
   }
 
-  // make getWinner method grab the element it wants to append to 
-  getWinner(player){
+  getWinner(player) {
     document.body.innerHTML =
       `<p class='winner'></p>`
     let winner = document.querySelector('.winner')
