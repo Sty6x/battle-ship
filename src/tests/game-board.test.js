@@ -1,3 +1,4 @@
+import { Ships } from '../entities.js'
 import { GameBoard } from '../game-board.js'
 
 
@@ -15,7 +16,7 @@ describe('Instantiated GameBoard should create players and store them into an ar
   }
   let board = new GameBoard()
   test('Create 2 Players and Let Player constructor take in a Ship Constructor', () => {
-    expect(board.getPlayers(new Players(Ships))).toEqual([{ "id": "player", "ship": { "id": "ship" } }, { "id": "player", "ship": { "id": "ship" } }])
+    expect(board.getPlayers(Players, Ships)).toEqual([{ "id": "player", "ship": { "id": "ship" } }, { "id": "player", "ship": { "id": "ship" } }])
   })
 })
 
@@ -64,24 +65,43 @@ describe('Creating Board with passed in gridx and gridy', () => {
 
 describe('Evaluating Each Players array', () => {
   let board = new GameBoard();
-  let ship = [5, 2, 1, 5]
-  class Players {
-    constructor(ships) {
-      this.shipDock = ships
+  class Ships {
+    constructor(id) {
+      this.id = id
     }
   }
-  board.getPlayers(new Players(ship))
+  class Players {
+    constructor(ships) {
+      this.shipDock = []
+      this.shipNum = [6, 5, 4, 3, 2, 2]
+      this.createShips(ships)
+    }
+    createShips(ships) {
+      for (let i = 0; i < this.shipNum.length; i++) {
+        this.shipDock.push(new ships(this.shipNum[i]))
+      }
+      return this.shipDock
+    }
+  }
+  board.getPlayers(Players, Ships)
   test('should continue', () => {
     expect(board.evalPlayers()).toEqual('continue game')
   })
-
-  test('should return player 2 wins', () => {
+  test('should return 2', () => {
+    console.log(board.playersArr)
     board.playersArr[0].shipDock = []
+    console.log(board.playersArr)
     expect(board.evalPlayers()).toEqual(2)
   })
 
-  test.only('should return player 1 wins', () => {
+  test('should return 1', () => {
+    console.log(board.playersArr)
+    // needed a clone for the ships arrays since it the first player objects
+    // array of ship is still reffered here
+    let testShips = board.playersArr[1].shipDock.map(x => x)
+    board.playersArr[0].shipDock = testShips
     board.playersArr[1].shipDock = []
+    console.log(board.playersArr)
     expect(board.evalPlayers()).toEqual(1)
   })
 })

@@ -1,12 +1,14 @@
 import PubSub from "pubsub-js"
+
+
 export class GameBoard {
   constructor() {
     this.playersArr = []
   }
 
-  getPlayers(player) {
+  getPlayers(player, ship) {
     for (let i = 0; i < 2; i++) {
-      this.playersArr.push(player)
+      this.playersArr.push(new player(ship))
     }
     return this.playersArr
   }
@@ -35,8 +37,7 @@ export class GameBoard {
       player = 2
       this.getWinner(player)
       return player
-    }
-    if (this.playersArr[1].shipDock.length == 0) {
+    } else if (this.playersArr[1].shipDock.length == 0) {
       player = 1
       this.getWinner(player)
       return player
