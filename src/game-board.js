@@ -46,8 +46,9 @@ export class GameBoard {
 
   // make getWinner method grab the element it wants to append to 
   getWinner(player){
-    let winner = document.createElement('p')
-    winner.setAttribute('class','winner')
+    document.body.innerHTML =
+      `<p class='winner'></p>`
+    let winner = document.querySelector('.winner')
     winner.textContent = `Player ${player} Wins`
     return winner.textContent
   }
