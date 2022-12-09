@@ -1,5 +1,6 @@
 export class Display {
   constructor() {
+
   }
   //shipToDock will subscribe to 'sendDock'
   shipToDock(playerDock, shipDocks) {
@@ -11,7 +12,8 @@ export class Display {
     }
     return shipDocks
   }
-  displayGrid (arr,containerQuery = '.grid-container'){
+
+  displayGrid (arr,containerQuery = '#grid-container'){
       let gridContainer = document.querySelector(containerQuery)
       for (let i = 0; i < arr.length; i++) {
         gridContainer.appendChild(arr[i])
