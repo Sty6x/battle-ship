@@ -88,20 +88,16 @@ describe('Evaluating Each Players array', () => {
     expect(board.evalPlayers()).toEqual('continue game')
   })
   test('should return 2', () => {
-    console.log(board.playersArr)
     board.playersArr[0].shipDock = []
-    console.log(board.playersArr)
     expect(board.evalPlayers()).toEqual(2)
   })
 
   test('should return 1', () => {
-    console.log(board.playersArr)
     // needed a clone for the ships arrays since it the first player objects
     // array of ship is still reffered here
     let testShips = board.playersArr[1].shipDock.map(x => x)
     board.playersArr[0].shipDock = testShips
     board.playersArr[1].shipDock = []
-    console.log(board.playersArr)
     expect(board.evalPlayers()).toEqual(1)
   })
 })

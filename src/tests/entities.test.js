@@ -2,7 +2,7 @@ import { Players, Ships } from '../entities.js'
 
 describe('Creating Ships when player object is instantiated', () => {
 
-  test.only('instantiates 6 ships', () => {
+  test('instantiates 6 ships', () => {
     class Ships {
       constructor(cells) {
         this.id = cells
