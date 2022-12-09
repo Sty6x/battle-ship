@@ -11,15 +11,12 @@ export class Display {
     }
     return shipDocks
   }
-  createBoard(gridx, gridy) {
-    let gridArr = []
-    for (let i = 0; i < gridx; i++) {
-      for (let j = 0; j < gridy; j++) {
-        let grid = document.createElement('div')
-        grid.setAttribute('class', 'grid')
-        gridArr.push(grid)
+
+  displayGrid (arr){
+      let gridContainer = document.querySelector('.grid-container')
+      for (let i = 0; i < arr.length; i++) {
+        gridContainer.appendChild(arr[i])
       }
+      return gridContainer
     }
-    return gridArr
-  }
 }
