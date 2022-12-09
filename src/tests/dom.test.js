@@ -26,30 +26,3 @@ test('Insert ships cell arr into each div ship dock',()=>{
 
 
 
-describe('Creating Board with passed in gridx and gridy', () => {
-  let display = new Display();
-  test('gameBoard should be 100', () => {
-    expect(display.createBoard(10, 10).length).toBe(100)
-  })
-  test('gameBoard should be 50', () => {
-    expect(display.createBoard(5, 10).length).toBe(50)
-  })
-  test('gameBoard should be 25', () => {
-    expect(display.createBoard(5, 5).length).toBe(25)
-  })
-  test('displays 100 divs of class grid', () => {
-    let gridArr =display.createBoard(10, 10)
-    document.body.innerHTML =
-      `<div class='grid-container'></div>`
-
-    let displayGrid = (arr) => {
-      let gridContainer = document.querySelector('.grid-container')
-      for (let i = 0; i < arr.length; i++) {
-        gridContainer.appendChild(arr[i])
-      }
-      return gridContainer
-    }
-    expect(displayGrid(gridArr).children.length).toEqual(100)
-  })
-})
-
