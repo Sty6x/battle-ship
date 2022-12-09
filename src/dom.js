@@ -11,9 +11,8 @@ export class Display {
     }
     return shipDocks
   }
-
-  displayGrid (arr){
-      let gridContainer = document.querySelector('.grid-container')
+  displayGrid (arr,containerQuery = '.grid-container'){
+      let gridContainer = document.querySelector(containerQuery)
       for (let i = 0; i < arr.length; i++) {
         gridContainer.appendChild(arr[i])
       }
