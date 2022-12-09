@@ -11,6 +11,7 @@ export class Players {
     for (let i = 0; i < playerShips.length; i++) {
       this.shipDock.push(new ship(playerShips[i]))
     }
+    PubSub.publish('sendDock',this.shipArr)
     return this.shipDock
   }
   //removeShip should subsribe to isSunk
