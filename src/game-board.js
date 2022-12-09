@@ -45,7 +45,7 @@ export class GameBoard {
       return 'continue game'
     }
   }
-
+ //hmm to dom.js?
   getWinner(player) {
     document.body.innerHTML =
       `<p class='winner'></p>`
