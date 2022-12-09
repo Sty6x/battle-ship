@@ -13,10 +13,13 @@ document.body.innerHTML =
     </div>`
 test('Insert ships cell arr into each div ship dock',()=>{
     let shipDocks = document.querySelectorAll('.dock') 
-    let shipDocksList = Array.from(shipDocks)
     let display = new Display()
     let player = new Players(Ships)
-   expect(display.shipToDock(player.shipDock,shipDocks)).toEqual() 
+    expect(display.shipToDock(player.shipDock,shipDocks)[0].children.length).toEqual(6) 
+    expect(display.shipToDock(player.shipDock,shipDocks)[1].children.length).toEqual(5) 
+    expect(display.shipToDock(player.shipDock,shipDocks)[2].children.length).toEqual(4) 
+    expect(display.shipToDock(player.shipDock,shipDocks)[3].children.length).toEqual(3) 
+    expect(display.shipToDock(player.shipDock,shipDocks)[4].children.length).toEqual(2) 
+    expect(display.shipToDock(player.shipDock,shipDocks)[5].children.length).toEqual(2) 
   })
-
 })
