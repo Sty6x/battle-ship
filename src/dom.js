@@ -19,10 +19,12 @@ export class Display {
     }
 
   dropShip(target,dock){
-    const targetParent = target.parentNode()
-    const targetNdx = targetParent.indexOf(target)
+    const targetParent = target.parentNode
+    const tChildren = Array.from(targetParent.children)
+    const targetNdx = tChildren.indexOf(target)
     for(let i = 0; i < dock.children.length;i++) {
      targetParent.children[targetNdx + i].appendChild(dock.children[i]) 
     }
+    return tChildren
   }
 }

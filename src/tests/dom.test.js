@@ -55,6 +55,8 @@ describe('Dropping the ships to a target', () => {
   let gb = new GameBoard()
   let dp = new Display()
   let player = new Players(Ships)
+
+  test('Should Add the dock to the first cell of the grid and its preceeding cells', () => {
   document.body.innerHTML =
   `<div id='grid-container'></div>
    <div id='ship-dock-container'> 
@@ -66,12 +68,11 @@ describe('Dropping the ships to a target', () => {
       <div class='dock'></div>
     </div>`
 
-
-  test('Should Add the dock to the first cell of the grid and its preceeding cells', () => {
   let docks = document.querySelectorAll('.dock')
   dp.shipToDock(player.shipDock, docks)
-  dp.displayGrid(gb.createBoard(10, 10))
+  dp.displayGrid(gb.createBoard(5, 5))
   let dock = document.getElementById('ship-dock-container').children[0]
+    console.log(dock)
   let target = document.getElementById('grid-container').children[0]
     expect(dp.dropShip(target, dock)).toBe('something')
   })
