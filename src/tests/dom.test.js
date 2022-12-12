@@ -70,9 +70,8 @@ describe('Dropping the ships to a target', () => {
 
   let docks = document.querySelectorAll('.dock')
   dp.shipToDock(player.shipDock, docks)
-  dp.displayGrid(gb.createBoard(5, 5))
-  let dock = document.getElementById('ship-dock-container').children[0]
-    console.log(dock)
+  dp.displayGrid(gb.createBoard(2, 6))
+  let dock = docks[0] 
   let target = document.getElementById('grid-container').children[0]
     expect(dp.dropShip(target, dock)).toBe('something')
   })
