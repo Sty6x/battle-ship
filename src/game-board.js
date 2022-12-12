@@ -49,6 +49,7 @@ export class GameBoard {
   getWinner(player) {
     document.body.innerHTML =
       `<p class='winner'></p>`
+    PubSub.publish('getWinner',player)
     let winner = document.querySelector('.winner')
     winner.textContent = `Player ${player} Wins`
     return winner.textContent
