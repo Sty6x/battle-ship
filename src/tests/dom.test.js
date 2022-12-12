@@ -32,7 +32,6 @@ describe('Should display the grid that was created by the gameboard', () => {
     let grids = gb.createBoard(10, 10)
     document.body.innerHTML =
       `<div id='grid-container'></div>`
-    let gc = document.querySelector('#grid-container')
     expect(dp.displayGrid(grids).children.length).toEqual(100)
   })
 
@@ -40,7 +39,6 @@ describe('Should display the grid that was created by the gameboard', () => {
     let grids = gb.createBoard(5, 10)
     document.body.innerHTML =
       `<div id='grid-container'></div>`
-    let gc = document.querySelector('#grid-container')
     expect(dp.displayGrid(grids).children.length).toEqual(50)
   })
 
@@ -48,8 +46,34 @@ describe('Should display the grid that was created by the gameboard', () => {
     let grids = gb.createBoard(5, 5)
     document.body.innerHTML =
       `<div id='grid-container'></div>`
-    let gc = document.querySelector('#grid-container')
     expect(dp.displayGrid(grids).children.length).toEqual(25)
   })
 })
 
+
+describe('Dropping the ships to a target', () => {
+  let gb = new GameBoard()
+  let dp = new Display()
+  let player = new Players(Ships)
+  document.body.innerHTML =
+  `<div id='grid-container'></div>
+   <div id='ship-dock-container'> 
+      <div class='dock'></div>
+      <div class='dock'></div>
+      <div class='dock'></div>
+      <div class='dock'></div>
+      <div class='dock'></div>
+      <div class='dock'></div>
+    </div>`
+
+
+  test('Should Add the dock to the first cell of the grid and its preceeding cells', () => {
+  let docks = document.querySelectorAll('.dock')
+  dp.shipToDock(player.shipDock, docks)
+  dp.displayGrid(gb.createBoard(10, 10))
+  let dock = document.getElementById('ship-dock-container').children[0]
+  let target = document.getElementById('grid-container').children[0]
+    expect(dp.dropShip(target, dock)).toBe('something')
+  })
+
+})

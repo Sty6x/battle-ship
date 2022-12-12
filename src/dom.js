@@ -1,7 +1,4 @@
 export class Display {
-  constructor() {
-
-  }
   //shipToDock will subscribe to 'sendDock'
   shipToDock(playerDock, shipDocks) {
     for (let i = 0; i < playerDock.length; i++) {
@@ -20,4 +17,12 @@ export class Display {
       }
       return gridContainer
     }
+
+  dropShip(target,dock){
+    const targetParent = target.parentNode()
+    const targetNdx = targetParent.indexOf(target)
+    for(let i = 0; i < dock.children.length;i++) {
+     targetParent.children[targetNdx + i].appendChild(dock.children[i]) 
+    }
+  }
 }
