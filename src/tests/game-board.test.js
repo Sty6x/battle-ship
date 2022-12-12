@@ -102,18 +102,3 @@ describe('Evaluating Each Players array', () => {
   })
 })
 
-describe('Calls the Winner of the Game', () => {
-  let board = new GameBoard()
-  test('expect to show that player 2 to wins', () => {
-    document.body.innerHTML =
-      `<p class='winner'>Player 2 Wins</p>`
-    let winner = document.querySelector('.winner')
-    expect(board.getWinner(2)).toEqual(winner.textContent)
-  })
-  test('expect to show that player 1 to wins', () => {
-    document.body.innerHTML =
-      `<p class='winner'>Player 1 Wins</p>`
-    let winner = document.querySelector('.winner')
-    expect(board.getWinner(1)).toEqual(winner.textContent)
-  })
-})

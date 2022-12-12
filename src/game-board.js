@@ -35,23 +35,14 @@ export class GameBoard {
     let player;
     if (this.playersArr[0].shipDock.length == 0) {
       player = 2
-      this.getWinner(player)
+      PubSub.publish('getWinner', player)
       return player
     } else if (this.playersArr[1].shipDock.length == 0) {
       player = 1
-      this.getWinner(player)
+      PubSub.publish('getWinner', player)
       return player
     } else {
       return 'continue game'
     }
-  }
- //hmm to dom.js?
-  getWinner(player) {
-    document.body.innerHTML =
-      `<p class='winner'></p>`
-    PubSub.publish('getWinner',player)
-    let winner = document.querySelector('.winner')
-    winner.textContent = `Player ${player} Wins`
-    return winner.textContent
   }
 }

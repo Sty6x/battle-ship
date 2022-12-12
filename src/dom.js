@@ -28,4 +28,11 @@ export class Display {
     }
     return tChildren
   }
+
+  // subscribe to getWinner
+  displayWinner(msg, player) {
+    let winner = document.getElementById('winner')
+    winner.textContent = `Player ${player} Wins!`
+  }
+
 }
