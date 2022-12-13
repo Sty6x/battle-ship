@@ -28,30 +28,22 @@ export class Ai extends Players {
     super(ship)
   }
   placeShip() {
-    let gridcontainer = document.getElementById('ai-grid-container');
-    let numOfGrids = gridcontainer.children.length
-    for (let i = 0; i < this.shipDock.length; i++) {
-      let randomTarget = Math.floor(Math.random() * numOfGrids)
-      for (let j = 0; j < this.shipDock[i].cellArr.length; j++) {
-        // console.log(this.shipDock[i].cellArr[j])
-        console.log(randomTarget, j)
-        // gridcontainer.children[randomTarget + j].appendChild(this.shipDock[i].cellArr[j])
-      }
-    }
+    let {target,preceedingE} = this.checkGrid()
+ 
     return gridcontainer
   }
 
+  // wrong
   checkGrid() {
     let gridcontainer = document.getElementById('ai-grid-container');
     let numOfGrids = gridcontainer.children.length
-    let randomTarget = Math.floor(Math.random() * numOfGrids)
     let prE = []
+    let randomTarget = Math.floor(Math.random() * numOfGrids)
     for (let i = 0; i < this.shipDock.length; i++) {
       for (let j = 0; j < this.shipDock[i].cellArr.length; j++) {
-        console.log(randomTarget)
         if (gridcontainer.children[randomTarget].classList.contains('vacant') &&
           gridcontainer.children[randomTarget + j].classList.contains('vacant')) {
-          console.log('pushed')
+          // console.log('pushed')
           prE.push(gridcontainer.children[randomTarget + j])
         }
       else {
