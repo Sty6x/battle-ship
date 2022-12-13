@@ -199,6 +199,6 @@ describe('Ai Placing Ships on its own grid', () => {
     document.body.innerHTML =
       `<div id='ai-grid-container'></div>`
     dp.displayGrid(board, '#ai-grid-container')
-    expect(ai.placeShip()).toEqual('nge')
+    expect(ai.checkGrid()).toEqual('nge')
   })
 })

@@ -23,17 +23,7 @@ export class Players {
   }
 }
 
-// inheritance
-// need to be a subclass of Players
-// needs the createShip removeShip
 export class Ai extends Players {
-  //refer the pc's grid
-  //and pick any random cell it wants to place
-  //need the target grid which is random
-  // does not need a dock
-  // does not need a target since it will only refer
-  // the parent node of the grids and randomize
-  // its children
   constructor(ship) {
     super(ship)
   }
@@ -49,6 +39,29 @@ export class Ai extends Players {
       }
     }
     return gridcontainer
+  }
+
+  checkGrid() {
+    let gridcontainer = document.getElementById('ai-grid-container');
+    let numOfGrids = gridcontainer.children.length
+    let randomTarget = Math.floor(Math.random() * numOfGrids)
+    let prE = []
+    for (let i = 0; i < this.shipDock.length; i++) {
+      for (let j = 0; j < this.shipDock[i].cellArr.length; j++) {
+        console.log(randomTarget)
+        if (gridcontainer.children[randomTarget].classList.contains('vacant') &&
+          gridcontainer.children[randomTarget + j].classList.contains('vacant')) {
+          console.log('pushed')
+          prE.push(gridcontainer.children[randomTarget + j])
+        }
+      else {
+        // if not full and target has no class of vacant go again
+        this.checkGrid()
+      }
+    }
+  }
+    console.log('done')
+    return { target: gridcontainer.children[randomTarget], preceedingE: prE }
   }
 }
 
