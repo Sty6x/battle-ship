@@ -23,6 +23,28 @@ export class Players {
   }
 }
 
+// inheritance
+// need to be a subclass of Players
+// needs the createShip removeShip
+export class Ai extends Players{
+    //refer the pc's grid
+  //and pick any random cell it wants to place
+  //need the target grid which is random
+  // does not need a dock
+  // does not need a target since it will only refer
+  // the parent node of the grids and randomize
+  // its children
+
+  placeShip(ships){
+    let gridcontainer = document.getElementById('grid-container');
+    let numOfGrids = gridcontainer.children.length
+    let randomTarget = Math.floor(Math.random() * numOfGrids)
+    let target = gridcontainer.children[randomTarget]
+
+  }
+}
+
+
 export class Ships {
   constructor(cells) {
     this.cellArr = []
@@ -61,3 +83,8 @@ export class Ships {
     return cell.className
   }
 }
+
+let ai = new Ai(Ships)
+console.log(ai.shipDock)
+
+
