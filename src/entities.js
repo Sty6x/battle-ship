@@ -4,14 +4,14 @@ export class Players {
   constructor(ship) {
     this.shipDock = []
     this.ship = ship
-    this.shipArr = [6,5,4,3,2,2]
+    this.shipArr = [6, 5, 4, 3, 2, 2]
     this.#createShipDock(this.ship, this.shipArr)
   }
   #createShipDock(ship, playerShips) {
     for (let i = 0; i < playerShips.length; i++) {
       this.shipDock.push(new ship(playerShips[i]))
     }
-    PubSub.publish('sendDock',this.shipArr)
+    PubSub.publish('sendDock', this.shipArr)
     return this.shipDock
   }
   //removeShip should subsribe to isSunk
@@ -26,21 +26,29 @@ export class Players {
 // inheritance
 // need to be a subclass of Players
 // needs the createShip removeShip
-export class Ai extends Players{
-    //refer the pc's grid
+export class Ai extends Players {
+  //refer the pc's grid
   //and pick any random cell it wants to place
   //need the target grid which is random
   // does not need a dock
   // does not need a target since it will only refer
   // the parent node of the grids and randomize
   // its children
-
-  placeShip(ships){
-    let gridcontainer = document.getElementById('grid-container');
+  constructor(ship) {
+    super(ship)
+  }
+  placeShip() {
+    let gridcontainer = document.getElementById('ai-grid-container');
     let numOfGrids = gridcontainer.children.length
-    let randomTarget = Math.floor(Math.random() * numOfGrids)
-    let target = gridcontainer.children[randomTarget]
-
+    for (let i = 0; i < this.shipDock.length; i++) {
+      let randomTarget = Math.floor(Math.random() * numOfGrids)
+      for (let j = 0; j < this.shipDock[i].cellArr.length; j++) {
+        // console.log(this.shipDock[i].cellArr[j])
+        console.log(randomTarget, j)
+        // gridcontainer.children[randomTarget + j].appendChild(this.shipDock[i].cellArr[j])
+      }
+    }
+    return gridcontainer
   }
 }
 
@@ -83,8 +91,4 @@ export class Ships {
     return cell.className
   }
 }
-
-let ai = new Ai(Ships)
-console.log(ai.shipDock)
-
 

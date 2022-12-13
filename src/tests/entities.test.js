@@ -1,4 +1,6 @@
-import { Players, Ships } from '../entities.js'
+import { Players, Ships, Ai } from '../entities.js'
+import { Display } from '../dom.js'
+import { GameBoard } from '../game-board.js'
 
 describe('Creating Ships when player object is instantiated', () => {
 
@@ -9,7 +11,7 @@ describe('Creating Ships when player object is instantiated', () => {
         this.isShip = true;
       }
     }
-    
+
     let p1 = new Players(Ships)
     expect(p1.shipDock).toEqual([{ id: 6, isShip: true }, { id: 5, isShip: true },
     { id: 4, isShip: true }, { id: 3, isShip: true },
@@ -178,5 +180,25 @@ describe('Removing ship from ship dock when isSunk is true and publishes the obj
   let ship3 = p1.shipDock[2]
   test('should remove the 3rd ship', () => {
     expect(p1.removeShip(ship3)).toEqual(ship3)
+  })
+})
+
+
+describe('Ai Should create its own Ships Object on instance', () => {
+  let ai = new Ai(Ships)
+  test('Should have a length of appropriate ships', () => { expect(ai.shipDock.length).toBe(6) })
+})
+
+describe('Ai Placing Ships on its own grid', () => {
+  let ai = new Ai(Ships)
+  let dp = new Display()
+  let gb = new GameBoard()
+  test.only('ai ship placement should store each cell to any of the grids in grid container', () => {
+    let board = gb.createBoard(5, 5)
+
+    document.body.innerHTML =
+      `<div id='ai-grid-container'></div>`
+    dp.displayGrid(board, '#ai-grid-container')
+    expect(ai.placeShip()).toEqual('nge')
   })
 })
