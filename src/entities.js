@@ -28,31 +28,34 @@ export class Ai extends Players {
     super(ship)
   }
   placeShip() {
-    let {target,preceedingE} = this.checkGrid()
- 
-    return gridcontainer
+    // console.log(this.shipDock[0])
+    let gridContainer = document.getElementById('ai-grid-container')
+    let grids = Array.from(gridContainer)
+    for(let i = 0; i < this.shipDock.length;i++){
+      let { target, preceedingE } = this.checkGrid(this.shipDock[i])
+      console.log({t:target,pe:preceedingE})
+    }
+      // return gridcontainer
   }
 
   // wrong
-  checkGrid() {
+  checkGrid(ship) {
     let gridcontainer = document.getElementById('ai-grid-container');
     let numOfGrids = gridcontainer.children.length
     let prE = []
     let randomTarget = Math.floor(Math.random() * numOfGrids)
-    for (let i = 0; i < this.shipDock.length; i++) {
-      for (let j = 0; j < this.shipDock[i].cellArr.length; j++) {
-        if (gridcontainer.children[randomTarget].classList.contains('vacant') &&
-          gridcontainer.children[randomTarget + j].classList.contains('vacant')) {
-          // console.log('pushed')
-          prE.push(gridcontainer.children[randomTarget + j])
-        }
+    for (let i = 0; i < ship.cellArr.length; i++) {
+      if (gridcontainer.children[randomTarget].classList.contains('vacant') &&
+        gridcontainer.children[randomTarget + i].classList.contains('vacant')) {
+        // console.log('pushed')
+        prE.push(gridcontainer.children[randomTarget + i])
+      }
       else {
         // if not full and target has no class of vacant go again
         this.checkGrid()
       }
     }
-  }
-    console.log('done')
+    // console.log('done')
     return { target: gridcontainer.children[randomTarget], preceedingE: prE }
   }
 }

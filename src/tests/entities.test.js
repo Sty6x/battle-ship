@@ -194,11 +194,11 @@ describe('Ai Placing Ships on its own grid', () => {
   let dp = new Display()
   let gb = new GameBoard()
   test.only('ai ship placement should store each cell to any of the grids in grid container', () => {
-    let board = gb.createBoard(5, 5)
+    let board = gb.createBoard(10, 10)
 
     document.body.innerHTML =
       `<div id='ai-grid-container'></div>`
     dp.displayGrid(board, '#ai-grid-container')
-    expect(ai.checkGrid()).toEqual('nge')
+    expect(ai.placeShip()).toEqual('nge')
   })
 })
