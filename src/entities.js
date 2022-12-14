@@ -30,12 +30,14 @@ export class Ai extends Players {
   placeShip() {
     // console.log(this.shipDock[0])
     let gridContainer = document.getElementById('ai-grid-container')
-    let grids = Array.from(gridContainer)
+    let grids = Array.from(gridContainer.children)
     for(let i = 0; i < this.shipDock.length;i++){
       let { target, preceedingE } = this.checkGrid(this.shipDock[i])
-      console.log({t:target,pe:preceedingE})
+      // console.log(grids.indexOf(target))
+      console.log({current:grids.indexOf(preceedingE[0]),next:grids.indexOf(preceedingE[1]),nextNext:grids.indexOf(preceedingE[2])})
+      // console.log({t:target,pe:preceedingE})
     }
-      // return gridcontainer
+      return gridContainer
   }
 
   // wrong
@@ -44,6 +46,7 @@ export class Ai extends Players {
     let numOfGrids = gridcontainer.children.length
     let prE = []
     let randomTarget = Math.floor(Math.random() * numOfGrids)
+    console.log({randomTarget:randomTarget})
     for (let i = 0; i < ship.cellArr.length; i++) {
       if (gridcontainer.children[randomTarget].classList.contains('vacant') &&
         gridcontainer.children[randomTarget + i].classList.contains('vacant')) {
@@ -56,6 +59,9 @@ export class Ai extends Players {
       }
     }
     // console.log('done')
+    // prE.pop()
+    // dont need the target since the first iteration i = 0 so random target + 0 
+    // will still be the random target value 
     return { target: gridcontainer.children[randomTarget], preceedingE: prE }
   }
 }
