@@ -31,17 +31,16 @@ export class Ai extends Players {
     // console.log(this.shipDock[0])
     let gridContainer = document.getElementById('ai-grid-container')
     let grids = Array.from(gridContainer.children)
-    for(let i = 0 ; i < this.shipDock.length; i++){
+    for (let i = 0; i < this.shipDock.length; i++) {
       let { target, preceedingE } = this.checkGrid(this.shipDock[i])
-      console.log(grids.indexOf(target))
-      for(let j = 0;j < this.shipDock[i].cellArr.length;j++){
+      for (let j = 0; j < this.shipDock[i].cellArr.length; j++) {
         let ndxPos = grids.indexOf(preceedingE[j])
-        console.log(ndxPos)
-        grids[ndxPos].appendChild(this.shipDock[i].cellArr[j]) 
+        grids[ndxPos].appendChild(this.shipDock[i].cellArr[j])
       }
     }
-   return  gridContainer
+    return gridContainer
   }
+
 
   // wrong
   checkGrid(ship) {
@@ -50,13 +49,13 @@ export class Ai extends Players {
     let prE = []
     let randomTarget = Math.floor(Math.random() * numOfGrids)
     for (let i = 0; i < ship.cellArr.length; i++) {
-      if (gridcontainer.children[randomTarget].classList.contains('vacant') &&
-        gridcontainer.children[randomTarget + i].classList.contains('vacant')) {
-        // console.log('pushed')
+      //checks each preceeding element starting from the target
+      if (gridcontainer.children[randomTarget + i].classList.contains('vacant')) {
         prE.push(gridcontainer.children[randomTarget + i])
       }
-      else {
-        // if not full and target has no class of vacant go again
+      else if (gridcontainer.children[randomTarget + i] === undefined || 
+        (!gridcontainer.children[randomTarget + i].classList.contains('vacant'))) {
+        // if not defined and target has no class of vacant go again
         this.checkGrid()
       }
     }
