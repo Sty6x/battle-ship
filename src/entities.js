@@ -27,12 +27,12 @@ export class Ai extends Players {
   constructor(ship) {
     super(ship)
   }
-  placeShip() {
+  async placeShip() {
     // console.log(this.shipDock[0])
     let gridContainer = document.getElementById('ai-grid-container')
     let grids = Array.from(gridContainer.children)
     for (let i = 0; i < this.shipDock.length; i++) {
-      let { target, preceedingE } = this.checkGrid(this.shipDock[i])
+      let { target, preceedingE } = await this.checkGrid(this.shipDock[i])
       for (let j = 0; j < this.shipDock[i].cellArr.length; j++) {
         let ndxPos = grids.indexOf(preceedingE[j])
         grids[ndxPos].appendChild(this.shipDock[i].cellArr[j])
@@ -41,9 +41,7 @@ export class Ai extends Players {
     return gridContainer
   }
 
-
-  // wrong
-  checkGrid(ship) {
+  async checkGrid(ship) {
     let gridcontainer = document.getElementById('ai-grid-container');
     let numOfGrids = gridcontainer.children.length
     let prE = []
@@ -64,6 +62,13 @@ export class Ai extends Players {
     // dont need the target since the first iteration i = 0 so random target + 0 
     // will still be the random target value 
     return { target: gridcontainer.children[randomTarget], preceedingE: prE }
+  }
+
+  async attack(){
+    let playerGrid = document.getElementById('player-grid-container')
+    let grids = Array.from(playerGrid.children)
+    let randomTarget = Math.floor(Math.random() * grids.length)
+    return playerGrid.children[randomTarget]
   }
 }
 
