@@ -31,13 +31,16 @@ export class Ai extends Players {
     // console.log(this.shipDock[0])
     let gridContainer = document.getElementById('ai-grid-container')
     let grids = Array.from(gridContainer.children)
-    for(let i = 0; i < this.shipDock.length;i++){
+    for(let i = 0 ; i < this.shipDock.length; i++){
       let { target, preceedingE } = this.checkGrid(this.shipDock[i])
-      // console.log(grids.indexOf(target))
-      console.log({current:grids.indexOf(preceedingE[0]),next:grids.indexOf(preceedingE[1]),nextNext:grids.indexOf(preceedingE[2])})
-      // console.log({t:target,pe:preceedingE})
+      console.log(grids.indexOf(target))
+      for(let j = 0;j < this.shipDock[i].cellArr.length;j++){
+        let ndxPos = grids.indexOf(preceedingE[j])
+        console.log(ndxPos)
+        grids[ndxPos].appendChild(this.shipDock[i].cellArr[j]) 
+      }
     }
-      return gridContainer
+   return  gridContainer
   }
 
   // wrong
@@ -46,7 +49,6 @@ export class Ai extends Players {
     let numOfGrids = gridcontainer.children.length
     let prE = []
     let randomTarget = Math.floor(Math.random() * numOfGrids)
-    console.log({randomTarget:randomTarget})
     for (let i = 0; i < ship.cellArr.length; i++) {
       if (gridcontainer.children[randomTarget].classList.contains('vacant') &&
         gridcontainer.children[randomTarget + i].classList.contains('vacant')) {

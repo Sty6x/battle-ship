@@ -189,16 +189,4 @@ describe('Ai Should create its own Ships Object on instance', () => {
   test('Should have a length of appropriate ships', () => { expect(ai.shipDock.length).toBe(6) })
 })
 
-describe('Ai Placing Ships on its own grid', () => {
-  let ai = new Ai(Ships)
-  let dp = new Display()
-  let gb = new GameBoard()
-  test.only('ai ship placement should store each cell to any of the grids in grid container', () => {
-    let board = gb.createBoard(10, 10)
 
-    document.body.innerHTML =
-      `<div id='ai-grid-container'></div>`
-    dp.displayGrid(board, '#ai-grid-container')
-    expect(ai.placeShip()).toEqual('nge')
-  })
-})
