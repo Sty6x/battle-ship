@@ -6,10 +6,9 @@ export class GameBoard {
     this.playersArr = []
   }
 
-  getPlayers(player, ship) {
-    for (let i = 0; i < 2; i++) {
-      this.playersArr.push(new player(ship))
-    }
+  getPlayers(player,player2, ship) {
+    this.playersArr.push(new player(ship))
+    this.playersArr.push(new player2(ship))
     return this.playersArr
   }
   receiveAttack(targetCell) {
