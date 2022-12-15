@@ -76,12 +76,30 @@ export class Scenes {
     let outerContGrid = document.createElement('div')
     let gridCont = document.createElement('div');
     let sideBarShipDock = document.createElement('div')
+    let dockContainer = document.createElement('div')
+    let rdyBtn = document.createElement('button')
+    rdyBtn.textContent ='READY'
+    let docks = (length)=>{
+      const dockArr = []
+      for(let i= 0; i < length;i++){
+        let dock = document.createElement('div')
+        dock.setAttribute('class','dock')
+        dockArr.push(dock)
+      }
+      return dockArr
+    }
     selectionContainer.append(outerContGrid, sideBarShipDock)
     outerContGrid.appendChild(gridCont)
+    for(let i = 0 ; i < docks(6).length;i++){
+      dockContainer.append(docks(6)[i])
+    }
+    sideBarShipDock.append(dockContainer,rdyBtn)
     selectionContainer.setAttribute('id', 'selection-container')
     outerContGrid.setAttribute('id','outer-selection-grid-cont')
     gridCont.setAttribute('id', 'player-grid-cont')
     sideBarShipDock.setAttribute('id', 'side-bar-dock')
+    dockContainer.setAttribute('id','dock-container')
+    rdyBtn.setAttribute('id','ready-btn')
     for (let i = 0; i < playerGrids.length; i++) {
       gridCont.appendChild(playerGrids[i])
     }
