@@ -1,14 +1,13 @@
 export class Display {
   async shipToDock(playerDock,shipDocks) {
     let docks = await shipDocks
-    console.log(docks[1])
     for (let i = 0; i < playerDock.length; i++) {
       let tmpDock = playerDock[i]
       for (let j = 0; j < tmpDock.cellArr.length; j++) {
         docks[i].appendChild(tmpDock.cellArr[j])
       }
     }
-    return shipDocks
+    return docks 
   }
 
   displayGrid(arr, containerQuery = '#grid-container') {
@@ -89,6 +88,7 @@ export class Scenes {
       for (let i = 0; i < length; i++) {
         let dock = document.createElement('div')
         dock.setAttribute('class', 'dock')
+        dock.setAttribute('draggable','true')
         dockArr.push(dock)
       }
       return dockArr

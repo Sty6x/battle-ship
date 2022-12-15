@@ -246,9 +246,11 @@ h1#title-text{
 }
 
 #dock-container{
-  display: grid;
-  grid-template-columns: repeat(3,1fr);
-  grid-template-rows: repeat(2,1fr);
+  display: flex;
+  flex-direction: column;
+  /* grid-template-columns: repeat(3,min-max(1fr,max-content)); */
+  /* grid-template-rows: repeat(2,min-max(1fr,max-content)); */
+  justify-content: center;
   gap: 30px;
   min-height: 70%;
   width: 70%;
@@ -267,8 +269,10 @@ h1#title-text{
 .dock{
   border: solid red 1px;
   display: flex;
-  flex-direction: column;
   gap: 5px;
+  justify-content: space-evenly;
+  min-height: 2em;
+  /* min-width: fit-content; */
 }
 
 #ready-btn{
@@ -285,4 +289,6 @@ h1#title-text{
   background-color: white;
   border: 1px solid pink;
   padding: 2px;
+  width: 100%;
+  /* flex-grow: 1; */
 }
