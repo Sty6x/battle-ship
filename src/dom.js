@@ -35,4 +35,8 @@ export class Display {
     winner.textContent = `Player ${player} Wins!`
   }
 
+  selectionScene(){
+    let mainContainer = document.getElementById('main-container');
+    mainContainer.children[0].setAttribute('style','display:none;')
+  }
 }
