@@ -58,6 +58,7 @@ table {
 @font-face{
   font-family: 'space-mono';
   src:url('../src/assets/fonts/SpaceMono-BoldItalic_1.woff') format('woff');
+
   font-style: italic;
   font-weight: 700;
 }
@@ -125,13 +126,19 @@ h1#title-text{
 
 .gates{
   position: absolute;
-  /* border: 1px solid red; */
   z-index: 999;
   width: 50vw;
   height: 100vh;
   background-color: rgb(0, 0, 0,.8);
+  box-shadow:rgb(0, 0,0,0.6 );
 }
+#gate-left{
+  box-shadow: 5px 0px 10px rgb(0, 0,0,0.6 );
+}
+#gate-right{
 
+  box-shadow: -5px 0px 10px rgb(0, 0,0,0.6 );
+}
 @keyframes close-left{
   0%{
    left: -50%;
@@ -151,36 +158,64 @@ h1#title-text{
 
 }
 
-.right-closed{
+.right-close{
   animation-name: close-right;
   animation-duration: 650ms;
   animation-fill-mode: forwards;
   animation-timing-function: ease-out;
 }
-.left-closed{
+.left-close{
   animation-name: close-left;
   animation-duration: 650ms;
-  animation-fill-mode: forwards;
+  animation-fill-mode:forwards;
   animation-timing-function: ease-out;
 }
 
-/* .right-closed{ */
+.right-closed{
+    right: 0%;
+}
 
-/*   right: calc(-100%/2); */
-/* } */
-/* .left-closed{ */
+.left-closed{
+    left: 0%;
+}
+@keyframes open-left{
+  0%{
+   left: 0%;
+  }
+  100%{
+    left: -60%;
+  } 
+}
+@keyframes open-right{
 
-/*   left: calc(-100%/2); */
-/* } */
+ 0%{
+    right: 0%;
+  }
+  100%{
+    right: -60%;
+  }
+
+}
 
 
-
+.right-opened{
+  animation-name: open-right;
+  animation-duration: 650ms;
+  animation-fill-mode: forwards;
+  animation-timing-function: ease-in-out;
+}
+.left-opened{
+  animation-name: open-left;
+  animation-duration: 650ms;
+  animation-fill-mode: forwards;
+  animation-timing-function: ease-in-out;
+}
 .right-open{
-  right: -50%;
+  right: -60%;
 }
 
 .left-open{
-  left:-50% ;
+  left:-60% ;
 }
 
 
