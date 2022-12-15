@@ -37,6 +37,9 @@ export class Display {
 
   selectionScene(){
     let mainContainer = document.getElementById('main-container');
-    mainContainer.children[0].setAttribute('style','display:none;')
+    // mainContainer.children[0].setAttribute('style','display:none;')
+    let gates = Array.from(document.querySelectorAll('.gates'))
+    gates[0].classList.replace('left-open','left-closed')
+    gates[1].classList.replace('right-open','right-closed')
   }
 }
