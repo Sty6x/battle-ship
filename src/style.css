@@ -136,7 +136,6 @@ h1#title-text{
   box-shadow: 5px 0px 10px rgb(0, 0,0,0.6 );
 }
 #gate-right{
-
   box-shadow: -5px 0px 10px rgb(0, 0,0,0.6 );
 }
 @keyframes close-left{
@@ -224,6 +223,7 @@ h1#title-text{
   min-height: 100vh;
   display: flex;
 }
+
 #player-grid-cont {
   display: grid;
 	grid-template-columns: repeat(10,1fr);
@@ -231,10 +231,13 @@ h1#title-text{
 	border-radius: 6px;
 	width: 600px;
 	height: 600px;
+  gap: 2px;
 }
  
 .grids{
-  border: red solid 1px;
+  border: 1px solid #141C2C;
+  background-color: #596476 ;
+  border-radius: 4px;
 }
 
 #outer-selection-grid-cont{ 
@@ -248,8 +251,6 @@ h1#title-text{
 #dock-container{
   display: flex;
   flex-direction: column;
-  /* grid-template-columns: repeat(3,min-max(1fr,max-content)); */
-  /* grid-template-rows: repeat(2,min-max(1fr,max-content)); */
   justify-content: center;
   gap: 30px;
   min-height: 70%;
@@ -265,16 +266,19 @@ h1#title-text{
   min-height: fit-content;
   width: 40%;
   padding: 3em 2em 3em 2em;
+  box-shadow: -2px 0px 10px rgb(0, 0,0,0.6 );
 }
 .dock{
-  border: solid red 1px;
   display: flex;
-  gap: 5px;
-  justify-content: space-evenly;
-  min-height: 2em;
-  /* min-width: fit-content; */
+  justify-content: left;
+  max-width: max-content;
 }
 
+.outer-dock{
+  gap: 5px;
+  min-height: 2em;
+
+}
 #ready-btn{
   appearance: none;
   font-size: 2rem;
@@ -287,8 +291,11 @@ h1#title-text{
 
 .ship-cell{
   background-color: white;
-  border: 1px solid pink;
-  padding: 2px;
-  width: 100%;
-  /* flex-grow: 1; */
+  padding: 1.4em;
+  border-radius: 4px;
+  border:2px solid #78A4AC
+}
+
+.empty-dock{
+
 }

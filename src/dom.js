@@ -1,13 +1,14 @@
 export class Display {
   async shipToDock(playerDock,shipDocks) {
-    let docks = await shipDocks
+    console.log(shipDocks)
+    // let outerDocks = Array.from(shipDocks)
     for (let i = 0; i < playerDock.length; i++) {
       let tmpDock = playerDock[i]
       for (let j = 0; j < tmpDock.cellArr.length; j++) {
-        docks[i].appendChild(tmpDock.cellArr[j])
+        shipDocks[i].firstChild.appendChild(tmpDock.cellArr[j])
       }
     }
-    return docks 
+    return shipDocks 
   }
 
   displayGrid(arr, containerQuery = '#grid-container') {
@@ -84,31 +85,35 @@ export class Scenes {
     let rdyBtn = document.createElement('button')
     rdyBtn.textContent = 'READY'
     let docks = (length) => {
-      const dockArr = []
+      const outerDockArr= []
       for (let i = 0; i < length; i++) {
         let dock = document.createElement('div')
-        dock.setAttribute('class', 'dock')
-        dock.setAttribute('draggable','true')
-        dockArr.push(dock)
+        let inDock = document.createElement('div')
+        dock.setAttribute('class', 'dock-outer')
+        inDock.setAttribute('class','dock')
+        inDock.setAttribute('draggable','true')
+        outerDockArr.push(dock)
+        outerDockArr[i].appendChild(inDock)
       }
-      return dockArr
+      return outerDockArr
     }
-    selectionContainer.append(outerContGrid, sideBarShipDock)
-    outerContGrid.appendChild(gridCont)
     for (let i = 0; i < docks(6).length; i++) {
       dockContainer.append(docks(6)[i])
     }
+    for (let i = 0; i < playerGrids.length; i++) {
+      gridCont.appendChild(playerGrids[i])
+    }
+    outerContGrid.appendChild(gridCont)
+    selectionContainer.append(outerContGrid, sideBarShipDock)
     sideBarShipDock.append(dockContainer, rdyBtn)
+
     selectionContainer.setAttribute('id', 'selection-container')
     outerContGrid.setAttribute('id', 'outer-selection-grid-cont')
     gridCont.setAttribute('id', 'player-grid-cont')
     sideBarShipDock.setAttribute('id', 'side-bar-dock')
     dockContainer.setAttribute('id', 'dock-container')
     rdyBtn.setAttribute('id', 'ready-btn')
-    for (let i = 0; i < playerGrids.length; i++) {
-      gridCont.appendChild(playerGrids[i])
-    }
-    return {cont:selectionContainer,docks:dockContainer.children}
+    return {cont:selectionContainer,docks:dockContainer}
   }
 
 }
