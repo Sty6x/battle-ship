@@ -1,6 +1,5 @@
 export class Display {
-  //shipToDock will subscribe to 'sendDock'
-  shipToDock(playerDock, shipDocks) {
+  shipToDock(playerDock,shipDocks) {
     for (let i = 0; i < playerDock.length; i++) {
       let tmpDock = playerDock[i]
       for (let j = 0; j < tmpDock.cellArr.length; j++) {
@@ -43,11 +42,11 @@ export class Display {
       let gateStyle = getComputedStyle(leftGate)
       let gateTimer = gateStyle.animationDuration.slice(0, gateStyle.animationDuration.length - 1) * 1000
       setTimeout(() => {
-        resolve({gl: gates[0], gr: gates[1] })
+        resolve({ gl: gates[0], gr: gates[1] })
       }, gateTimer)
     })
   }
-  async changeScene(scene, bool) {
+ changeScene(scene, bool) {
     let mainContainer = document.getElementById('main-container');
     let remScene = mainContainer.children[0]
     if (bool) {
@@ -58,19 +57,23 @@ export class Display {
         remScene.remove()
         return ob
       }).then((ob) => {
-        mainContainer.appendChild(scene)
+        mainContainer.appendChild(scene.cont)
         ob.gl.classList.replace('left-closed', 'left-opening')
         ob.gr.classList.replace('right-closed', 'right-opening')
       })
     } else {
+      mainContainer.appendChild(scene.cont)
       mainContainer.children[0].remove()
     }
+
+    return new Promise(resolve => {
+      resolve(scene)
+    })
   }
 
 }
 
 export class Scenes {
-
   selectionScene(playerGrids) {
     let selectionContainer = document.createElement('div')
     let outerContGrid = document.createElement('div')
@@ -78,32 +81,33 @@ export class Scenes {
     let sideBarShipDock = document.createElement('div')
     let dockContainer = document.createElement('div')
     let rdyBtn = document.createElement('button')
-    rdyBtn.textContent ='READY'
-    let docks = (length)=>{
+    rdyBtn.textContent = 'READY'
+    let docks = (length) => {
       const dockArr = []
-      for(let i= 0; i < length;i++){
+      for (let i = 0; i < length; i++) {
         let dock = document.createElement('div')
-        dock.setAttribute('class','dock')
+        dock.setAttribute('class', 'dock')
         dockArr.push(dock)
       }
       return dockArr
     }
+    console.log(docks(6))
     selectionContainer.append(outerContGrid, sideBarShipDock)
     outerContGrid.appendChild(gridCont)
-    for(let i = 0 ; i < docks(6).length;i++){
+    for (let i = 0; i < docks(6).length; i++) {
       dockContainer.append(docks(6)[i])
     }
-    sideBarShipDock.append(dockContainer,rdyBtn)
+    sideBarShipDock.append(dockContainer, rdyBtn)
     selectionContainer.setAttribute('id', 'selection-container')
-    outerContGrid.setAttribute('id','outer-selection-grid-cont')
+    outerContGrid.setAttribute('id', 'outer-selection-grid-cont')
     gridCont.setAttribute('id', 'player-grid-cont')
     sideBarShipDock.setAttribute('id', 'side-bar-dock')
-    dockContainer.setAttribute('id','dock-container')
-    rdyBtn.setAttribute('id','ready-btn')
+    dockContainer.setAttribute('id', 'dock-container')
+    rdyBtn.setAttribute('id', 'ready-btn')
     for (let i = 0; i < playerGrids.length; i++) {
       gridCont.appendChild(playerGrids[i])
     }
-    return selectionContainer
+    return {cont:selectionContainer,docks:docks(6)}
   }
 
 }

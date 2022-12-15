@@ -8,17 +8,18 @@ const DP = new Display();
 const SC = new Scenes()
 const GB = new GameBoard()
 const PLAYER_ARR = GB.getPlayers(Players, Ai, Ships)
-console.log(PLAYER_ARR)
-let docks = Array.from(document.querySelectorAll('.dock'))
 
-MAIN_CONT.addEventListener('click', (e) => {
+
+MAIN_CONT.addEventListener('click', change)
+
+async function change(e) {
   const target = e.target
-
   if (target.matches('#start-btn')) {
     console.log(target)
-    DP.changeScene(SC.selectionScene(GB.createBoard(10, 10)), true)    
-    // DP.shipToDock(PLAYER_ARR[0].shipDock, docks)
-    console.log(docks)
+    DP.changeScene(SC.selectionScene(GB.createBoard(10, 10)), true).then(data=>{
+      console.log(data)
+      DP.shipToDock(PLAYER_ARR[0].shipDock,data.docks)
+    })
+    // let docks = document.querySelectorAll('.dock')
   }
-
-})
+}
