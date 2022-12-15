@@ -34,18 +34,16 @@ export class Display {
     let winner = document.getElementById('winner')
     winner.textContent = `Player ${player} Wins!`
   }
-  async gateAnim(remScene) {
+  async gateAnim() {
     return new Promise(resolve => {
       let gates = Array.from(document.querySelectorAll('.gates'))
-      gates[0].classList.replace('left-open', 'left-close')
-      gates[1].classList.replace('right-open', 'right-close')
-      let leftGate = document.querySelector('.left-close')
+      gates[0].classList.replace('left-open', 'left-closing')
+      gates[1].classList.replace('right-open', 'right-closing')
+      let leftGate = document.querySelector('.left-closing')
       let gateStyle = getComputedStyle(leftGate)
       let gateTimer = gateStyle.animationDuration.slice(0, gateStyle.animationDuration.length - 1) * 1000
       setTimeout(() => {
-        resolve({ sc: remScene, gl: gates[0], gr: gates[1] })
-        gates[0].classList.replace('left-close', 'left-closed')
-        gates[1].classList.replace('right-close', 'right-closed')
+        resolve({gl: gates[0], gr: gates[1] })
       }, gateTimer)
     })
   }
@@ -54,13 +52,18 @@ export class Display {
     let remScene = mainContainer.children[0]
     if (bool) {
       console.log('change')
-      this.gateAnim(remScene).then((ob) => {
-        ob.sc.remove()
+      this.gateAnim().then((ob) => {
+        console.log(ob.gl.classList)
+        ob.gl.classList.replace('left-closing', 'left-closed')
+        ob.gr.classList.replace('right-closing', 'right-closed')
+        console.log(ob.gl.classList)
+        remScene.remove()
         return ob
       }).then((ob) => {
         mainContainer.appendChild(scene)
-        ob.gl.classList.replace('left-closed','left-opened')
-        ob.gr.classList.replace('right-closed','right-opened')
+        ob.gl.classList.replace('left-closed', 'left-opening')
+        ob.gr.classList.replace('right-closed', 'right-opening')
+          console.log(ob.gl.classList)
       })
 
     } else {
