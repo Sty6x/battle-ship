@@ -1,9 +1,11 @@
 export class Display {
-  shipToDock(playerDock,shipDocks) {
+  async shipToDock(playerDock,shipDocks) {
+    let docks = await shipDocks
+    console.log(docks[1])
     for (let i = 0; i < playerDock.length; i++) {
       let tmpDock = playerDock[i]
       for (let j = 0; j < tmpDock.cellArr.length; j++) {
-        shipDocks[i].appendChild(tmpDock.cellArr[j])
+        docks[i].appendChild(tmpDock.cellArr[j])
       }
     }
     return shipDocks
@@ -91,7 +93,6 @@ export class Scenes {
       }
       return dockArr
     }
-    console.log(docks(6))
     selectionContainer.append(outerContGrid, sideBarShipDock)
     outerContGrid.appendChild(gridCont)
     for (let i = 0; i < docks(6).length; i++) {
@@ -107,7 +108,7 @@ export class Scenes {
     for (let i = 0; i < playerGrids.length; i++) {
       gridCont.appendChild(playerGrids[i])
     }
-    return {cont:selectionContainer,docks:docks(6)}
+    return {cont:selectionContainer,docks:dockContainer.children}
   }
 
 }

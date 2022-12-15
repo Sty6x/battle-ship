@@ -17,9 +17,8 @@ async function change(e) {
   if (target.matches('#start-btn')) {
     console.log(target)
     DP.changeScene(SC.selectionScene(GB.createBoard(10, 10)), true).then(data=>{
-      console.log(data)
+      console.log(data.docks)
       DP.shipToDock(PLAYER_ARR[0].shipDock,data.docks)
     })
-    // let docks = document.querySelectorAll('.dock')
   }
 }

@@ -280,3 +280,9 @@ h1#title-text{
   padding: .3em 2em .3em 2em;
   cursor:pointer;
 }
+
+.ship-cell{
+  background-color: white;
+  border: 1px solid pink;
+  padding: 2px;
+}
