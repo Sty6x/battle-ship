@@ -53,19 +53,15 @@ export class Display {
     if (bool) {
       console.log('change')
       this.gateAnim().then((ob) => {
-        console.log(ob.gl.classList)
         ob.gl.classList.replace('left-closing', 'left-closed')
         ob.gr.classList.replace('right-closing', 'right-closed')
-        console.log(ob.gl.classList)
         remScene.remove()
         return ob
       }).then((ob) => {
         mainContainer.appendChild(scene)
         ob.gl.classList.replace('left-closed', 'left-opening')
         ob.gr.classList.replace('right-closed', 'right-opening')
-          console.log(ob.gl.classList)
       })
-
     } else {
       mainContainer.children[0].remove()
     }
@@ -77,10 +73,13 @@ export class Scenes {
 
   selectionScene(playerGrids) {
     let selectionContainer = document.createElement('div')
+    let outerContGrid = document.createElement('div')
     let gridCont = document.createElement('div');
     let sideBarShipDock = document.createElement('div')
-    selectionContainer.append(gridCont, sideBarShipDock)
+    selectionContainer.append(outerContGrid, sideBarShipDock)
+    outerContGrid.appendChild(gridCont)
     selectionContainer.setAttribute('id', 'selection-container')
+    outerContGrid.setAttribute('id','outer-selection-grid-cont')
     gridCont.setAttribute('id', 'player-grid-cont')
     sideBarShipDock.setAttribute('id', 'side-bar-dock')
     for (let i = 0; i < playerGrids.length; i++) {

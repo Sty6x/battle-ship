@@ -25,7 +25,7 @@ export class GameBoard {
     for (let i = 0; i < gridx; i++) {
       for (let j = 0; j < gridy; j++) {
         let grid = document.createElement('div')
-       grid.classList.add('grid','vacant') 
+       grid.classList.add('grids','vacant') 
         gridArr.push(grid)
       }
     }
