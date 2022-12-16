@@ -104,6 +104,10 @@ export class Scenes {
     let sideBarShipDock = document.createElement('div')
     let dockContainer = document.createElement('div')
     let rdyBtn = document.createElement('button')
+    let dockHeader = document.createElement('h3')
+    let gridHeader = document.createElement('h3')
+    dockHeader.textContent = 'SHIP DOCK'
+    gridHeader.textContent = 'DRAG YOUR SHIP HERE'
     rdyBtn.textContent = 'READY'
     let docks = (length) => {
       const dockArr = []
@@ -122,9 +126,9 @@ export class Scenes {
     for (let i = 0; i < playerGrids.length; i++) {
       gridCont.appendChild(playerGrids[i])
     }
-    outerContGrid.appendChild(gridCont)
     selectionContainer.append(outerContGrid, sideBarShipDock)
-    sideBarShipDock.append(dockContainer, rdyBtn)
+    outerContGrid.append(gridHeader,gridCont)
+    sideBarShipDock.append(dockHeader,dockContainer, rdyBtn)
 
     selectionContainer.setAttribute('id', 'selection-container')
     outerContGrid.setAttribute('id', 'outer-selection-grid-cont')
