@@ -15,16 +15,18 @@ MAIN_CONT.addEventListener('click', change)
 async function change(e) {
   const target = e.target
   if (target.matches('#start-btn')) {
-    DP.changeScene(SC.selectionScene(GB.createBoard(10, 10)), true).then(data=>{
-      DP.shipToDock(PLAYER_ARR[0].shipDock,data.docks)
+    DP.changeScene(SC.selectionScene(GB.createBoard(10, 10)), true).then(data => {
+      DP.shipToDock(PLAYER_ARR[0].shipDock, data.docks)
     })
   }
 }
-
-MAIN_CONT.addEventListener('dragstart',DP.dragShip)
-MAIN_CONT.addEventListener('dragover',DP.onDragShip)
-MAIN_CONT.addEventListener('drop',(e)=>{
-  let target = e.target;
+// draggTarget
+MAIN_CONT.addEventListener('dragstart', DP.dragShip)
+MAIN_CONT.addEventListener('dragover', DP.onDragShip)
+MAIN_CONT.addEventListener('drop', (e) => {
   let docks = document.querySelector('#dock-container')
-  DP.dropShip(target,docks)
+  let target = e
+  if (e.target.matches('.grids')) {
+    DP.dropShip(target, docks)
+  }
 })
