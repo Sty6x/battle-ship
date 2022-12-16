@@ -31,14 +31,14 @@ export class Display {
     const targetParent = target.parentNode;
     const grids = Array.from(targetParent.children);
     const targetNdx = grids.indexOf(target);
-    const iterateChildren = dock.children.length;
-    const dataId =  event.dataTransfer.getData('text/plain')
+    const dataId = event.dataTransfer.getData('text/plain')
     const draggedDock = document.getElementById(dataId)
+    const iterateChildren = draggedDock.children.length;
     for (let i = 0; i < iterateChildren; i++) {
       grids[targetNdx + i].appendChild(draggedDock.children[0])
     }
     console.log('done')
-    return targetNdx 
+    return targetNdx
   }
 
   // subscribe to getWinner
@@ -100,7 +100,7 @@ export class Scenes {
       for (let i = 0; i < length; i++) {
         let dock = document.createElement('div')
         dock.setAttribute('class', 'dock')
-        dock.setAttribute('id',`dock-${i}`)
+        dock.setAttribute('id', `dock-${i}`)
         dock.setAttribute('draggable', 'true')
         dockArr.push(dock)
       }
