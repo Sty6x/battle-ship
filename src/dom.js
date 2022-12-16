@@ -26,8 +26,7 @@ export class Display {
     ev.preventDefault()
     // some animation here
   }
-  dropShip(event, dock) {
-
+  dropShip(event) {
 
     const target = event.target
     const targetParent = target.parentNode;
@@ -93,7 +92,8 @@ export class Display {
       resolve(scene)
     })
   }
-
+  readyBtn(){
+  }
 }
 
 export class Scenes {

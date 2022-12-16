@@ -24,9 +24,9 @@ async function change(e) {
 MAIN_CONT.addEventListener('dragstart', DP.dragShip)
 MAIN_CONT.addEventListener('dragover', DP.onDragShip)
 MAIN_CONT.addEventListener('drop', (e) => {
-  let docks = document.querySelector('#dock-container')
   let target = e
   if (e.target.matches('.grids')) {
-    DP.dropShip(target, docks)
+    DP.dropShip(target)
   }
+  DP.readyBtn()
 })
