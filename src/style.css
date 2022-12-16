@@ -333,7 +333,7 @@ font-size: 3rem;
   100%{transform: translate(0px);}
 }
 .dock{
-
+  border: 2px dashed rgb(0, 0,0,0 );
   box-shadow: 0px 5px 10px rgb(0, 0,0,0.2 );
 }
 .dock:hover{
@@ -347,11 +347,10 @@ font-size: 3rem;
   box-shadow: 0px 15px 15px rgb(0, 0,0,0.4 );
 }
 
-.outer-dock{
-  gap: 5px;
-  min-height: 2em;
-
+.empty-docks{
+  border: 2px dashed rgb(0, 0,0,0 );
 }
+
 .ship-cell{
   background-color: white;
   padding: 1.4em;
@@ -363,13 +362,11 @@ font-size: 3rem;
 .empty-dock-cell{
   padding: 1.4em;
   border-radius: 4px;
-  border: 1px dashed var(--Aurora-two); 
+  border: 2px dashed var(--Aurora-two); 
   box-shadow: 0px 15px 15px rgb(0, 0,0,0.3 );
 }
 
-.empty-docks{
-  border: 1px dashed var(--Aurora-two);
-}
+
 
 #ready-btn{
   appearance: none;
