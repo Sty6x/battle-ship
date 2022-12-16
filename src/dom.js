@@ -27,6 +27,8 @@ export class Display {
     // some animation here
   }
   dropShip(event, dock) {
+
+
     const target = event.target
     const targetParent = target.parentNode;
     const grids = Array.from(targetParent.children);
@@ -34,8 +36,16 @@ export class Display {
     const dataId = event.dataTransfer.getData('text/plain')
     const draggedDock = document.getElementById(dataId)
     const iterateChildren = draggedDock.children.length;
+
+    const tmpCellsArr = []
     for (let i = 0; i < iterateChildren; i++) {
+      const tmpCells = document.createElement('div')
+      tmpCells.setAttribute('class', 'empty-dock-cell')
+      tmpCellsArr.push(tmpCells)
+      draggedDock.appendChild(tmpCellsArr[i])
       grids[targetNdx + i].appendChild(draggedDock.children[0])
+      draggedDock.setAttribute('class', 'empty-docks')
+      draggedDock.setAttribute('draggable', 'false')
     }
     console.log('done')
     return targetNdx
