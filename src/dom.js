@@ -1,14 +1,12 @@
 export class Display {
-  async shipToDock(playerDock,shipDocks) {
-    console.log(shipDocks)
-    // let outerDocks = Array.from(shipDocks)
+  async shipToDock(playerDock, shipDocks) {
     for (let i = 0; i < playerDock.length; i++) {
       let tmpDock = playerDock[i]
       for (let j = 0; j < tmpDock.cellArr.length; j++) {
-        shipDocks[i].firstChild.appendChild(tmpDock.cellArr[j])
+        shipDocks[i].appendChild(tmpDock.cellArr[j])
       }
     }
-    return shipDocks 
+    return shipDocks
   }
 
   displayGrid(arr, containerQuery = '#grid-container') {
@@ -19,6 +17,15 @@ export class Display {
     return gridContainer
   }
 
+  dragShip(ev) {
+    ev.dataTransfer.setData('text', ev.target.children)
+    console.log(ev.target.children)
+  }
+
+  onDragShip(ev) {
+    ev.preventDefault()
+    // some animation here
+  }
   dropShip(target, dock) {
     const targetParent = target.parentNode
     const tChildren = Array.from(targetParent.children)
@@ -48,7 +55,7 @@ export class Display {
       }, gateTimer)
     })
   }
- changeScene(scene, bool) {
+  changeScene(scene, bool) {
     let mainContainer = document.getElementById('main-container');
     let remScene = mainContainer.children[0]
     if (bool) {
@@ -85,17 +92,14 @@ export class Scenes {
     let rdyBtn = document.createElement('button')
     rdyBtn.textContent = 'READY'
     let docks = (length) => {
-      const outerDockArr= []
+      const dockArr = []
       for (let i = 0; i < length; i++) {
         let dock = document.createElement('div')
-        let inDock = document.createElement('div')
-        dock.setAttribute('class', 'dock-outer')
-        inDock.setAttribute('class','dock')
-        inDock.setAttribute('draggable','true')
-        outerDockArr.push(dock)
-        outerDockArr[i].appendChild(inDock)
+        dock.setAttribute('class', 'dock')
+        dock.setAttribute('draggable', 'true')
+        dockArr.push(dock)
       }
-      return outerDockArr
+      return dockArr
     }
     for (let i = 0; i < docks(6).length; i++) {
       dockContainer.append(docks(6)[i])
@@ -113,7 +117,7 @@ export class Scenes {
     sideBarShipDock.setAttribute('id', 'side-bar-dock')
     dockContainer.setAttribute('id', 'dock-container')
     rdyBtn.setAttribute('id', 'ready-btn')
-    return {cont:selectionContainer,docks:dockContainer}
+    return { cont: selectionContainer, docks: dockContainer.children }
   }
 
 }

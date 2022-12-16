@@ -99,6 +99,14 @@ body{
   align-items: center;
 }
 
+a{
+  text-decoration: none;
+}
+
+a:any-link{
+
+  color: black;
+}
 
 h1#title-text{
   text-align: center;
