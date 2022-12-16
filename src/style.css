@@ -265,14 +265,14 @@ h1#title-text{
   justify-content: center;
   align-items:center;
   gap: 30px;
-  min-height: 70%;
-  width: 70%;
+  /* min-height: 70%; */
+  /* width: 70%; */
 }
 
 #side-bar-dock{
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
+  justify-content: center;
   align-items: center;
   background-color: #141C2C;
   min-height: fit-content;
