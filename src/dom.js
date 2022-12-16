@@ -18,10 +18,7 @@ export class Display {
   }
 
   dragShip(ev) {
-    let parentNodeChildren = Array.from(ev.target.parentElement.children)
-    let ndxPosDock = parentNodeChildren.indexOf(ev.target)
-    ev.dataTransfer.setData('text/plain', ev.target)
-    console.log(ndxPosDock)
+    ev.dataTransfer.setData('text/plain', ev.target.id)
     console.log(ev.target)
   }
 
@@ -35,10 +32,10 @@ export class Display {
     const grids = Array.from(targetParent.children);
     const targetNdx = grids.indexOf(target);
     const iterateChildren = dock.children.length;
-    const data =  event.dataTransfer.getData('text/plain')
-    console.log(data.children)
+    const dataId =  event.dataTransfer.getData('text/plain')
+    const draggedDock = document.getElementById(dataId)
     for (let i = 0; i < iterateChildren; i++) {
-      grids[targetNdx + i].appendChild(dock.children[i].children[0])
+      grids[targetNdx + i].appendChild(draggedDock.children[0])
     }
     console.log('done')
     return targetNdx 
