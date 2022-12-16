@@ -102,7 +102,7 @@ body{
   --Frost-one: #8FBCBB;
   --Frost-two: #88C0D0;
   --Frost-three: #81A1C1;
-  --Forst-four: #5E81AC;
+  --Frost-four: #5E81AC;
 
   --Aurora-one: #BF616A;
   --Aurora-two:#D08770;
@@ -334,6 +334,7 @@ font-size: 3rem;
 }
 .dock{
 
+  box-shadow: 0px 5px 10px rgb(0, 0,0,0.2 );
 }
 .dock:hover{
   animation-name: dock-anim;
@@ -342,6 +343,8 @@ font-size: 3rem;
   animation-duration: 1000ms;
   cursor: pointer;
   animation-iteration-count: infinite;
+  transition: box-shadow 250ms ease-in-out;
+  box-shadow: 0px 15px 15px rgb(0, 0,0,0.4 );
 }
 
 .outer-dock{
@@ -353,16 +356,19 @@ font-size: 3rem;
   background-color: white;
   padding: 1.4em;
   border-radius: 4px;
-  border:2px solid #78A4AC
+  border:2px solid var(--Frost-two);
+  background-color: var(--Frost-four);
 }
 
 .empty-dock-cell{
   padding: 1.4em;
   border-radius: 4px;
-  border:1px solid #78A4AC
+  border: 1px dashed var(--Aurora-two); 
+  box-shadow: 0px 15px 15px rgb(0, 0,0,0.3 );
 }
+
 .empty-docks{
-  border: 1px dashed red;
+  border: 1px dashed var(--Aurora-two);
 }
 
 #ready-btn{

@@ -38,6 +38,7 @@ export class Display {
 
     const tmpCellsArr = []
     for (let i = 0; i < iterateChildren; i++) {
+      draggedDock.children[0].setAttribute('style','background-color:var(--Frost-four)')
       const tmpCells = document.createElement('div')
       tmpCells.setAttribute('class', 'empty-dock-cell')
       tmpCellsArr.push(tmpCells)
