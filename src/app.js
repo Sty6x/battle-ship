@@ -21,9 +21,8 @@ async function change(e) {
   }
   console.log(target)
   if (target.matches('#ready-btn')) {
-    DP.changeScene(SC.gameScene(),true).then(data => {
-      data.gridsCont.appendChild(DP.appendGrid(GB.createBoard(10,10),'ai-grid-cont'))
-
+    DP.changeScene(SC.gameScene(), true).then(data => {
+      data.gridsCont.appendChild(DP.appendGrid(GB.createBoard(10, 10), 'ai-grid-cont'))
     })
   }
 }

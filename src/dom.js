@@ -66,7 +66,8 @@ export class Display {
       let gateStyle = getComputedStyle(leftGate)
       let gateTimer = gateStyle.animationDuration.slice(0, gateStyle.animationDuration.length - 1) * 1000
       setTimeout(() => {
-        resolve({ gl: gates[0], gr: gates[1] })
+        resolve({ gl: gates[0], gr: gates[1] ,gt:gateTimer})
+      console.log(gateTimer)
       }, gateTimer)
     })
   }
@@ -76,14 +77,16 @@ export class Display {
     if (bool) {
       console.log('change')
       this.gateAnim().then((ob) => {
+        remScene.remove()
         ob.gl.classList.replace('left-closing', 'left-closed')
         ob.gr.classList.replace('right-closing', 'right-closed')
-        mainContainer.appendChild(scene.cont)
         return ob
       }).then((ob) => {
-        remScene.remove()
         ob.gl.classList.replace('left-closed', 'left-opening')
         ob.gr.classList.replace('right-closed', 'right-opening')
+          setTimeout(()=>{
+            mainContainer.appendChild(scene.cont)
+          },ob.gt)
         return ob
       })
     } else {
@@ -145,15 +148,14 @@ export class Scenes {
     let gameScene = document.createElement('div');
     let playerGrid = document.getElementById('player-grid-cont');
     let playersGridCont = document.createElement('div');
-    let aIGrid = document.getElementById('ai-grid-cont');
     let announcer = document.createElement('h1');
     gameScene.append(announcer, playersGridCont);
-    playersGridCont.appendChild(playerGrid, aIGrid)
+    playersGridCont.appendChild(playerGrid)
     gameScene.setAttribute('id', 'game-scene')
     playersGridCont.setAttribute('id', 'players-grid-container')
     announcer.setAttribute('id', 'winner')
 
-    return { cont: gameScene ,gridsCont: playersGridCont}
+    return { cont: gameScene, gridsCont: playersGridCont }
   }
 
 }

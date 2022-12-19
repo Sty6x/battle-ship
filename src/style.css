@@ -267,7 +267,7 @@ font-size: 3rem;
   display: flex;
 }
 
-#player-grid-cont {
+#player-grid-cont,#ai-grid-cont {
   display: grid;
 	grid-template-columns: repeat(10,1fr);
 	grid-template-rows: repeat(10, 1fr);
@@ -385,10 +385,29 @@ font-size: 3rem;
   background-color: rgb(255, 255, 255,.5);
 }
 
+
+
+
 .is-ready{
 
 }
 
 .is-not-ready{
 
+}
+
+#winner{
+  font-weight: bold;
+  font-size: 3rem;
+}
+#game-scene{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 60px;
+}
+#players-grid-container{
+  display: flex;
+  gap: 5em;
 }
