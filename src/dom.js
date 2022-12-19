@@ -11,7 +11,7 @@ export class Display {
 
   appendGrid(arr, containerQuery) {
     let gridContainer = document.createElement('div')
-    gridContainer.setAttribute('id', `${containerQuery}`)
+    gridContainer.setAttribute('id', containerQuery)
     for (let i = 0; i < arr.length; i++) {
       gridContainer.appendChild(arr[i])
     }
@@ -147,14 +147,13 @@ export class Scenes {
     let playersGridCont = document.createElement('div');
     let aIGrid = document.getElementById('ai-grid-cont');
     let announcer = document.createElement('h1');
-    gameScene.appendChild(announcer, playersGridCont)
+    gameScene.append(announcer, playersGridCont);
     playersGridCont.appendChild(playerGrid, aIGrid)
     gameScene.setAttribute('id', 'game-scene')
     playersGridCont.setAttribute('id', 'players-grid-container')
     announcer.setAttribute('id', 'winner')
 
-
-    return { cont: gameScene }
+    return { cont: gameScene ,gridsCont: playersGridCont}
   }
 
 }
