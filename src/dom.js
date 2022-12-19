@@ -9,8 +9,9 @@ export class Display {
     return shipDocks
   }
 
-  displayGrid(arr, containerQuery = '#grid-container') {
-    let gridContainer = document.querySelector(containerQuery)
+  appendGrid(arr, containerQuery) {
+    let gridContainer = document.createElement('div')
+    gridContainer.setAttribute('id', `${containerQuery}`)
     for (let i = 0; i < arr.length; i++) {
       gridContainer.appendChild(arr[i])
     }
@@ -59,8 +60,8 @@ export class Display {
   async gateAnim() {
     return new Promise(resolve => {
       let gates = Array.from(document.querySelectorAll('.gates'))
-      gates[0].classList.replace('left-open', 'left-closing')
-      gates[1].classList.replace('right-open', 'right-closing')
+      gates[0].classList.replace('left-opening', 'left-closing')
+      gates[1].classList.replace('right-opening', 'right-closing')
       let leftGate = document.querySelector('.left-closing')
       let gateStyle = getComputedStyle(leftGate)
       let gateTimer = gateStyle.animationDuration.slice(0, gateStyle.animationDuration.length - 1) * 1000
@@ -70,7 +71,7 @@ export class Display {
     })
   }
   changeScene(scene, bool) {
-    let mainContainer = document.getElementById('main-container');i
+    let mainContainer = document.getElementById('main-container');
     let remScene = mainContainer.children[0]
     if (bool) {
       console.log('change')
@@ -83,6 +84,7 @@ export class Display {
         remScene.remove()
         ob.gl.classList.replace('left-closed', 'left-opening')
         ob.gr.classList.replace('right-closed', 'right-opening')
+        return ob
       })
     } else {
       mainContainer.appendChild(scene.cont)
@@ -139,21 +141,20 @@ export class Scenes {
   }
 
 
-  gameScene(){
+  gameScene() {
     let gameScene = document.createElement('div');
     let playerGrid = document.getElementById('player-grid-cont');
     let playersGridCont = document.createElement('div');
     let aIGrid = document.getElementById('ai-grid-cont');
     let announcer = document.createElement('h1');
-    gameScene.appendChild(announcer,playersGridCont)
-    playersGridCont.appendChild(playerGrid,aIGrid)
-    gameScene.setAttribute('id','game-scene')
-    playersGridCont.setAttribute('id','players-grid-container')
-    aIGrid.setAttribute('id','ai-grid-cont')
-    announcer.setAttribute('id','winner') 
-    
-    
-    return {cont:gameScene}
+    gameScene.appendChild(announcer, playersGridCont)
+    playersGridCont.appendChild(playerGrid, aIGrid)
+    gameScene.setAttribute('id', 'game-scene')
+    playersGridCont.setAttribute('id', 'players-grid-container')
+    announcer.setAttribute('id', 'winner')
+
+
+    return { cont: gameScene }
   }
 
 }

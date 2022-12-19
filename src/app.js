@@ -20,8 +20,9 @@ async function change(e) {
     })
   }
   console.log(target)
-  if(target.matches('#ready-btn')){
-    SC.gameScene()
+  if (target.matches('#ready-btn')) {
+    DP.appendGrid(GB.createBoard(10,10),'#ai-grid-cont')
+    DP.changeScene(SC.gameScene(),true)
   }
 }
 // draggTarget
