@@ -27,12 +27,11 @@ export class Ai extends Players {
   constructor(ship) {
     super(ship)
   }
-  async placeShip() {
-    // console.log(this.shipDock[0])
-    let gridContainer = document.getElementById('ai-grid-container')
+  async placeShip(gridContainer) {
+    console.log(gridContainer)
     let grids = Array.from(gridContainer.children)
     for (let i = 0; i < this.shipDock.length; i++) {
-      let { target, preceedingE } = await this.checkGrid(this.shipDock[i])
+      let {preceedingE } = await this.checkGrid(this.shipDock[i],gridContainer)
       for (let j = 0; j < this.shipDock[i].cellArr.length; j++) {
         let ndxPos = grids.indexOf(preceedingE[j])
         grids[ndxPos].appendChild(this.shipDock[i].cellArr[j])
@@ -41,8 +40,7 @@ export class Ai extends Players {
     return gridContainer
   }
 
-  async checkGrid(ship) {
-    let gridcontainer = document.getElementById('ai-grid-container');
+  async checkGrid(ship,gridcontainer) {
     let numOfGrids = gridcontainer.children.length
     let prE = []
     let randomTarget = Math.floor(Math.random() * numOfGrids)

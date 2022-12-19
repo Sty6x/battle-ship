@@ -399,6 +399,7 @@ font-size: 3rem;
 #winner{
   font-weight: bold;
   font-size: 3rem;
+  color: var(--SS-three);
 }
 #game-scene{
   display: flex;
