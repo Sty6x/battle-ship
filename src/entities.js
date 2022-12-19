@@ -28,41 +28,47 @@ export class Ai extends Players {
     super(ship)
   }
   async placeShip(gridContainer) {
-    console.log(gridContainer)
     let grids = Array.from(gridContainer.children)
     for (let i = 0; i < this.shipDock.length; i++) {
-      let {preceedingE } = await this.checkGrid(this.shipDock[i],gridContainer)
+      let { preceedingE } = await this.checkGrid(this.shipDock[i], gridContainer)
       for (let j = 0; j < this.shipDock[i].cellArr.length; j++) {
         let ndxPos = grids.indexOf(preceedingE[j])
+        console.log({ index: ndxPos, nextEl: preceedingE[j] })
         grids[ndxPos].appendChild(this.shipDock[i].cellArr[j])
       }
     }
     return gridContainer
   }
 
-  async checkGrid(ship,gridcontainer) {
+  async checkGrid(ship, gridcontainer) {
     let numOfGrids = gridcontainer.children.length
     let prE = []
     let randomTarget = Math.floor(Math.random() * numOfGrids)
+    console.log({ length: ship.cellArr.length, remain: numOfGrids - randomTarget })
+    let max = numOfGrids - randomTarget
+    if (ship.cellArr.length > max) {
+      console.log('recall')
+      randomTarget = Math.floor(Math.random() * numOfGrids)
+    }
     for (let i = 0; i < ship.cellArr.length; i++) {
-      //checks each preceeding element starting from the target
-      if (gridcontainer.children[randomTarget + i].classList.contains('vacant')) {
+      if (gridcontainer.children[randomTarget + i].classList.contains('vacant') &&
+        gridcontainer.children[randomTarget + i].classList.contains('vacant') !== undefined) {
+
         prE.push(gridcontainer.children[randomTarget + i])
+        console.log(prE[i])
+        prE[i].classList.replace('vacant', 'occupied')
       }
-      else if (gridcontainer.children[randomTarget + i] === undefined || 
-        (!gridcontainer.children[randomTarget + i].classList.contains('vacant'))) {
-        // if not defined and target has no class of vacant go again
-        this.checkGrid()
+      else if (gridcontainer.children[randomTarget + i] == undefined ||
+        (!gridcontainer.children[randomTarget + i].classList.contains('vacant')) ||
+        gridcontainer.children[randomTarget + i].classList.contains('ship-cell')) {
+        this.checkGrid(ship, gridcontainer)
       }
     }
-    // console.log('done')
-    // prE.pop()
-    // dont need the target since the first iteration i = 0 so random target + 0 
-    // will still be the random target value 
-    return { target: gridcontainer.children[randomTarget], preceedingE: prE }
+
+    return { preceedingE: prE }
   }
 
-  async attack(){
+  async attack() {
     let playerGrid = document.getElementById('player-grid-container')
     let grids = Array.from(playerGrid.children)
     let randomTarget = Math.floor(Math.random() * grids.length)

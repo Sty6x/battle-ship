@@ -10,7 +10,13 @@ const GB = new GameBoard()
 const PLAYER_ARR = GB.getPlayers(Players, Ai, Ships)
 
 
-MAIN_CONT.addEventListener('click', change)
+MAIN_CONT.addEventListener('click', e=>{
+  const target = e.target;
+  change(e)
+  if(target.matches('.ship-cell')){
+    console.log(target)
+  }
+})
 
 async function change(e) {
   const target = e.target
@@ -19,10 +25,8 @@ async function change(e) {
       DP.shipToDock(PLAYER_ARR[0].shipDock, data.docks)
     })
   }
-  console.log(target)
   if (target.matches('#ready-btn')) {
     let AIGrid = DP.appendGrid(GB.createBoard(10, 10), 'ai-grid-cont')
-    console.log(AIGrid)
     DP.changeScene(SC.gameScene(AIGrid), true).then(data => {
       data.gridsCont.appendChild(AIGrid)
       PLAYER_ARR[1].placeShip(AIGrid)
