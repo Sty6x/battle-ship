@@ -19,6 +19,10 @@ async function change(e) {
       DP.shipToDock(PLAYER_ARR[0].shipDock, data.docks)
     })
   }
+  console.log(target)
+  if(target.matches('#ready-btn')){
+    SC.gameScene()
+  }
 }
 // draggTarget
 MAIN_CONT.addEventListener('dragstart', DP.dragShip)
@@ -28,5 +32,5 @@ MAIN_CONT.addEventListener('drop', (e) => {
   if (e.target.matches('.grids')) {
     DP.dropShip(target)
   }
-  DP.readyBtn()
+
 })

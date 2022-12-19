@@ -38,7 +38,7 @@ export class Display {
 
     const tmpCellsArr = []
     for (let i = 0; i < iterateChildren; i++) {
-      draggedDock.children[0].setAttribute('style','background-color:var(--Frost-four)')
+      draggedDock.children[0].setAttribute('style', 'background-color:var(--Frost-four)')
       const tmpCells = document.createElement('div')
       tmpCells.setAttribute('class', 'empty-dock-cell')
       tmpCellsArr.push(tmpCells)
@@ -70,17 +70,17 @@ export class Display {
     })
   }
   changeScene(scene, bool) {
-    let mainContainer = document.getElementById('main-container');
+    let mainContainer = document.getElementById('main-container');i
     let remScene = mainContainer.children[0]
     if (bool) {
       console.log('change')
       this.gateAnim().then((ob) => {
         ob.gl.classList.replace('left-closing', 'left-closed')
         ob.gr.classList.replace('right-closing', 'right-closed')
-        remScene.remove()
+        mainContainer.appendChild(scene.cont)
         return ob
       }).then((ob) => {
-        mainContainer.appendChild(scene.cont)
+        remScene.remove()
         ob.gl.classList.replace('left-closed', 'left-opening')
         ob.gr.classList.replace('right-closed', 'right-opening')
       })
@@ -92,8 +92,6 @@ export class Display {
     return new Promise(resolve => {
       resolve(scene)
     })
-  }
-  readyBtn(){
   }
 }
 
@@ -128,8 +126,8 @@ export class Scenes {
       gridCont.appendChild(playerGrids[i])
     }
     selectionContainer.append(outerContGrid, sideBarShipDock)
-    outerContGrid.append(gridHeader,gridCont)
-    sideBarShipDock.append(dockHeader,dockContainer, rdyBtn)
+    outerContGrid.append(gridHeader, gridCont)
+    sideBarShipDock.append(dockHeader, dockContainer, rdyBtn)
 
     selectionContainer.setAttribute('id', 'selection-container')
     outerContGrid.setAttribute('id', 'outer-selection-grid-cont')
@@ -138,6 +136,24 @@ export class Scenes {
     dockContainer.setAttribute('id', 'dock-container')
     rdyBtn.setAttribute('id', 'ready-btn')
     return { cont: selectionContainer, docks: dockContainer.children }
+  }
+
+
+  gameScene(){
+    let gameScene = document.createElement('div');
+    let playerGrid = document.getElementById('player-grid-cont');
+    let playersGridCont = document.createElement('div');
+    let aIGrid = document.getElementById('ai-grid-cont');
+    let announcer = document.createElement('h1');
+    gameScene.appendChild(announcer,playersGridCont)
+    playersGridCont.appendChild(playerGrid,aIGrid)
+    gameScene.setAttribute('id','game-scene')
+    playersGridCont.setAttribute('id','players-grid-container')
+    aIGrid.setAttribute('id','ai-grid-cont')
+    announcer.setAttribute('id','winner') 
+    
+    
+    return {cont:gameScene}
   }
 
 }
