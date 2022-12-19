@@ -61,7 +61,8 @@ export class Ai extends Players {
       else if (gridcontainer.children[randomTarget + i] == undefined ||
         (!gridcontainer.children[randomTarget + i].classList.contains('vacant')) ||
         gridcontainer.children[randomTarget + i].classList.contains('ship-cell')) {
-        this.checkGrid(ship, gridcontainer)
+        return this.checkGrid(ship, gridcontainer)
+
       }
     }
 
