@@ -41,7 +41,6 @@ export class Display {
 
     const tmpCellsArr = []
     for (let i = 0; i < iterateChildren; i++) {
-      draggedDock.children[0].setAttribute('style', 'background-color:var(--Frost-four)')
       const tmpCells = document.createElement('div')
       tmpCells.setAttribute('class', 'empty-dock-cell')
       tmpCellsArr.push(tmpCells)
@@ -58,6 +57,7 @@ export class Display {
   // subscribe to getWinner
   displayWinner(msg, player) {
     let winner = document.getElementById('winner')
+    winner.classList.replace('not-announced','announce')
     winner.textContent = `Player ${player} Wins!`
   }
   async gateAnim() {
@@ -154,6 +154,7 @@ export class Scenes {
     gameScene.setAttribute('id', 'game-scene')
     playersGridCont.setAttribute('id', 'players-grid-container')
     announcer.setAttribute('id', 'winner')
+    announcer.classList.add('not-announced')
 
     return { cont: gameScene, gridsCont: playersGridCont }
   }

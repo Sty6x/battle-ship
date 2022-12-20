@@ -411,15 +411,20 @@ font-size: 3rem;
   font-weight: bold;
   font-size: 3rem;
   color: var(--SS-three);
+  display: block;
+  position: absolute;
+  bottom: 80%;
 }
+
+
 #game-scene{
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  gap: 60px;
 }
 #players-grid-container{
+  margin-top: 5em;
   display: flex;
   gap: 5em;
 }

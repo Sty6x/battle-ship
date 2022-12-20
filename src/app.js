@@ -22,12 +22,14 @@ MAIN_CONT.addEventListener('click', e => {
     GB.receiveAttack(target)
     isTurn = false
   }
+  if(!isTurn){
   setTimeout(() => {
     const AiTarget = PLAYER_ARR[1].attack()
     GB.receiveAttack(AiTarget)
     isTurn = true;
-
   },300)
+
+  }
 })
 
 PLAYER_ARR[0].shipDock.forEach(ships => {
@@ -41,16 +43,17 @@ PLAYER_ARR[1].shipDock.forEach(ships => {
   })
 });
 
+PubSub.subscribe('getWinner',DP.displayWinner)
 PubSub.subscribe('shipSunkAI', (msg, data) => {
   PLAYER_ARR[1].removeShip(data)
-  GB.evalPlayers()
+  console.log(GB.evalPlayers())
   console.log({ this: PLAYER_ARR[0], dock: PLAYER_ARR[0].shipDock })
   console.log({ this: PLAYER_ARR[1], dock: PLAYER_ARR[1].shipDock })
 })
 
 PubSub.subscribe('shipSunkPlayer', (msg, data) => {
   PLAYER_ARR[0].removeShip(data)
-  GB.evalPlayers()
+  console.log(GB.evalPlayers())
   console.log({ this: PLAYER_ARR[0], dock: PLAYER_ARR[0].shipDock })
   console.log({ this: PLAYER_ARR[1], dock: PLAYER_ARR[1].shipDock })
 })
