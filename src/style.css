@@ -367,7 +367,9 @@ font-size: 3rem;
 
 }
 
-
+.occupied{
+  border: 2px solid var(--Aurora-two);
+}
 .empty-dock-cell{
   padding: 1.4em;
   border-radius: 4px;

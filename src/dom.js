@@ -45,6 +45,7 @@ export class Display {
       tmpCellsArr.push(tmpCells)
       draggedDock.appendChild(tmpCellsArr[i])
       grids[targetNdx + i].appendChild(draggedDock.children[0])
+      grids[targetNdx + i].classList.replace('vacant','occupied')
       draggedDock.setAttribute('class', 'empty-docks')
       draggedDock.setAttribute('draggable', 'false')
     }
