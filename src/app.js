@@ -17,6 +17,7 @@ let isGame;
 
 MAIN_CONT.addEventListener('click', e => {
   const target = e.target;
+  console.log(target)
   change(e)
   if (isTurn && target.classList.contains('ship-cell')) {
     console.log(target)

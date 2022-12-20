@@ -430,6 +430,9 @@ font-size: 3rem;
   justify-content: center;
   align-items: center;
   border-radius: 10px;
+  gap: 50px;
+  padding: 1.4em 2em 1.4em 2em;
+  box-shadow: 0px 5px 5px rgb(0, 0,0,0.6 );
 }
 
 #winner{
@@ -438,5 +441,20 @@ font-size: 3rem;
   color: var(--PN-one);
   display: block;
 }
+#play-btn{
+  appearance: none;
+  border: 1px solid var(--PN-four);
+  outline: none;
+  background-color: var(--Aurora-two);
+  color: var(--PN-one);
+  font-family: 'space-mono';
+  font-size: 3rem;
+  padding: .3em 1em .3em 1em;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: box-shadow 300ms ease-in;
+}
 
-
+#play-btn:hover{
+  box-shadow: 0px 10px 10px rgb(0, 0,0,0.6 );
+}
