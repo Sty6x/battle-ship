@@ -13,7 +13,7 @@ export class GameBoard {
   }
   receiveAttack(targetCell) {
     if (targetCell.classList.contains('ship-cell')) {
-      PubSub.publish("Target Cell", targetCell)
+      PubSub.publish("TargetCell", targetCell)
       return targetCell
     } else {
       return null

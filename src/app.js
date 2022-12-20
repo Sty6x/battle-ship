@@ -2,6 +2,7 @@ import './style.css'
 import { Display, Scenes } from './dom.js'
 import { Players, Ships, Ai } from './entities.js'
 import { GameBoard } from './game-board.js'
+import PubSub from 'pubsub-js'
 
 const MAIN_CONT = document.getElementById('main-container');
 const DP = new Display();
@@ -19,7 +20,8 @@ MAIN_CONT.addEventListener('click', e => {
 })
 
 PLAYER_ARR[1].shipDock.forEach(ships => {
-  PubSub.subscribe('Target Cell', (msg, data) => {
+  PubSub.subscribe('TargetCell', (msg, data) => {
+    console.log(data)
     ships.isHit(data)
   })
 });

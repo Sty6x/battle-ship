@@ -1,4 +1,4 @@
-import { PubSub } from 'pubsub-js'
+import  PubSub  from 'pubsub-js'
 
 export class Players {
   constructor(ship) {
@@ -10,7 +10,7 @@ export class Players {
     for (let i = 0; i < this.shipArr.length; i++) {
       this.shipDock.push(new this.ship(this.shipArr[i]))
     }
-    console.log(this.shipDock)
+    console.log({this:this,shipDock:this.shipDock})
     PubSub.publish('sendDock', this.shipArr)
     return this.shipDock
   }
