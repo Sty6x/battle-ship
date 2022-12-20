@@ -13,22 +13,24 @@ PLAYER_ARR.forEach(player => {
   player.createShipDock()
 })
 let isTurn = true;
+let isGame;
 
 MAIN_CONT.addEventListener('click', e => {
   const target = e.target;
   change(e)
-  if (isTurn && target.classList.contains('ship-cell')) {
-    console.log(target)
-    GB.receiveAttack(target)
-    isTurn = false
-  }
-  if(!isTurn){
-  setTimeout(() => {
-    const AiTarget = PLAYER_ARR[1].attack()
-    GB.receiveAttack(AiTarget)
-    isTurn = true;
-  },300)
-
+  if (isGame) {
+    if (isTurn && target.classList.contains('ship-cell')) {
+      console.log(target)
+      GB.receiveAttack(target)
+      isTurn = false
+    }
+    if (!isTurn) {
+      setTimeout(() => {
+        const AiTarget = PLAYER_ARR[1].attack()
+        GB.receiveAttack(AiTarget)
+        isTurn = true;
+      }, 300)
+    }
   }
 })
 
@@ -43,7 +45,10 @@ PLAYER_ARR[1].shipDock.forEach(ships => {
   })
 });
 
-PubSub.subscribe('getWinner',DP.displayWinner)
+PubSub.subscribe('getWinner', (msg, data) => {
+  isGame = false;
+  DP.displayWinner(msg,data)
+})
 PubSub.subscribe('shipSunkAI', (msg, data) => {
   PLAYER_ARR[1].removeShip(data)
   console.log(GB.evalPlayers())
@@ -60,7 +65,7 @@ PubSub.subscribe('shipSunkPlayer', (msg, data) => {
 async function change(e) {
   const target = e.target
   if (target.matches('#start-btn')) {
-
+    isGame = true
     DP.changeScene(SC.selectionScene(GB.createBoard(10, 10)), true).then(data => {
       DP.shipToDock(PLAYER_ARR[0].shipDock, data.docks)
     })
