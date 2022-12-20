@@ -67,7 +67,6 @@ export class Display {
       let gateTimer = gateStyle.animationDuration.slice(0, gateStyle.animationDuration.length - 1) * 1000
       setTimeout(() => {
         resolve({ gl: gates[0], gr: gates[1] })
-        console.log(gateTimer)
       }, gateTimer)
     })
   }

@@ -14,9 +14,15 @@ MAIN_CONT.addEventListener('click', e=>{
   const target = e.target;
   change(e)
   if(target.matches('.ship-cell')){
-    console.log(target)
+    GB.receiveAttack(target)
   }
 })
+
+PLAYER_ARR[1].shipDock.forEach(ships => {
+  PubSub.subscribe('Target Cell',(msg,data)=>{
+    ships.isHit(data)
+  })
+});
 
 async function change(e) {
   const target = e.target

@@ -4,7 +4,7 @@ export class Players {
   constructor(ship) {
     this.shipDock = []
     this.ship = ship
-    this.shipArr = [6, 5, 4, 3, 2, 2]
+    this.shipArr = [7,6, 5, 4, 3, 2]
     this.#createShipDock(this.ship, this.shipArr)
   }
   #createShipDock(ship, playerShips) {
@@ -33,7 +33,6 @@ export class Ai extends Players {
       let { preceedingE } = await this.checkGrid(this.shipDock[i], gridContainer)
       for (let j = 0; j < this.shipDock[i].cellArr.length; j++) {
         let ndxPos = grids.indexOf(preceedingE[j])
-        console.log({ index: ndxPos, nextEl: preceedingE[j] })
         grids[ndxPos].appendChild(this.shipDock[i].cellArr[j])
       }
     }
@@ -44,10 +43,8 @@ export class Ai extends Players {
     let numOfGrids = gridcontainer.children.length
     let prE = []
     let randomTarget = Math.floor(Math.random() * numOfGrids)
-    console.log({ length: ship.cellArr.length, remain: numOfGrids - randomTarget })
     let max = numOfGrids - randomTarget
     if (ship.cellArr.length > max) {
-      console.log('recall')
       randomTarget = Math.floor(Math.random() * numOfGrids)
     }
     for (let i = 0; i < ship.cellArr.length; i++) {
@@ -55,7 +52,6 @@ export class Ai extends Players {
         gridcontainer.children[randomTarget + i].classList.contains('vacant') !== undefined) {
 
         prE.push(gridcontainer.children[randomTarget + i])
-        console.log(prE[i])
         prE[i].classList.replace('vacant', 'occupied')
       }
       else if (gridcontainer.children[randomTarget + i] == undefined ||

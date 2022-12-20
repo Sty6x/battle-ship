@@ -352,12 +352,21 @@ font-size: 3rem;
 }
 
 .ship-cell{
-  background-color: white;
-  padding: 1.4em;
-  border-radius: 4px;
   border:2px solid var(--Frost-two);
   background-color: var(--Frost-four);
+
 }
+.ship-cell,.destroyed-cell{
+  padding: 1.4em;
+  border-radius: 4px;
+}
+
+.destroyed-cell{
+  border:2px solid var(--PN-one);
+  background-color: var(--Aurora-one);
+
+}
+
 
 .empty-dock-cell{
   padding: 1.4em;
