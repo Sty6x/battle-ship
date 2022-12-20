@@ -12,15 +12,24 @@ const PLAYER_ARR = GB.getPlayers(Players, Ai, Ships)
 PLAYER_ARR.forEach(player => {
   player.createShipDock()
 })
+const ISTURN = true;
 
 MAIN_CONT.addEventListener('click', e => {
   const target = e.target;
   change(e)
-
-  GB.receiveAttack(target)
+  if (ISTURN) {
+    GB.receiveAttack(target)
+  } else {
+    const AiTarget = PLAYER_ARR[1].attack()
+    GB.receiveAttack(AiTarget)
+  }
 })
 
-
+PLAYER_ARR[0].shipDock.forEach(ships => {
+  PubSub.subscribe("TargetCell", (msg, data) => {
+    ships.isHit(data)
+  })
+});
 PLAYER_ARR[1].shipDock.forEach(ships => {
   PubSub.subscribe("TargetCell", (msg, data) => {
     ships.isHit(data)
@@ -28,7 +37,9 @@ PLAYER_ARR[1].shipDock.forEach(ships => {
 });
 PubSub.subscribe('shipSunk', (msg, data) => {
   PLAYER_ARR[1].removeShip(data)
-  console.log(PLAYER_ARR[1].shipDock)
+  PLAYER_ARR[0].removeShip(data)
+  console.log({this:PLAYER_ARR[1],dock:PLAYER_ARR[1].shipDock})
+  console.log({this:PLAYER_ARR[0],dock:PLAYER_ARR[0].shipDock})
 })
 
 async function change(e) {
