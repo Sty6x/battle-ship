@@ -10,16 +10,16 @@ const GB = new GameBoard()
 const PLAYER_ARR = GB.getPlayers(Players, Ai, Ships)
 
 
-MAIN_CONT.addEventListener('click', e=>{
+MAIN_CONT.addEventListener('click', e => {
   const target = e.target;
   change(e)
-  if(target.matches('.ship-cell')){
+  if (target.matches('.ship-cell')) {
     GB.receiveAttack(target)
   }
 })
 
 PLAYER_ARR[1].shipDock.forEach(ships => {
-  PubSub.subscribe('Target Cell',(msg,data)=>{
+  PubSub.subscribe('Target Cell', (msg, data) => {
     ships.isHit(data)
   })
 });
@@ -27,6 +27,9 @@ PLAYER_ARR[1].shipDock.forEach(ships => {
 async function change(e) {
   const target = e.target
   if (target.matches('#start-btn')) {
+    PLAYER_ARR.forEach(player => {
+      player.createShipDock()
+    })
     DP.changeScene(SC.selectionScene(GB.createBoard(10, 10)), true).then(data => {
       DP.shipToDock(PLAYER_ARR[0].shipDock, data.docks)
     })

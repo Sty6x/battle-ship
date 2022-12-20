@@ -4,13 +4,13 @@ export class Players {
   constructor(ship) {
     this.shipDock = []
     this.ship = ship
-    this.shipArr = [7,6, 5, 4, 3, 2]
-    this.#createShipDock(this.ship, this.shipArr)
+    this.shipArr = [7, 6, 5, 4, 3, 2]
   }
-  #createShipDock(ship, playerShips) {
-    for (let i = 0; i < playerShips.length; i++) {
-      this.shipDock.push(new ship(playerShips[i]))
+  createShipDock() {
+    for (let i = 0; i < this.shipArr.length; i++) {
+      this.shipDock.push(new this.ship(this.shipArr[i]))
     }
+    console.log(this.shipDock)
     PubSub.publish('sendDock', this.shipArr)
     return this.shipDock
   }
@@ -26,6 +26,7 @@ export class Players {
 export class Ai extends Players {
   constructor(ship) {
     super(ship)
+    this.shipDock = []
   }
   async placeShip(gridContainer) {
     let grids = Array.from(gridContainer.children)
