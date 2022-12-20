@@ -13,8 +13,8 @@ PLAYER_ARR.forEach(player => {
   player.createShipDock()
 })
 let isTurn = true;
-let isGame = true;
-
+let isGame = false;
+let isSelection = false;
 MAIN_CONT.addEventListener('click', e => {
   const target = e.target;
   console.log(target)
@@ -46,7 +46,7 @@ PLAYER_ARR[1].shipDock.forEach(ships => {
 
 PubSub.subscribe('getWinner', (msg, data) => {
   isGame = false;
-  SC.gameOver() 
+  SC.gameOver()
   DP.displayWinner(msg, data)
 })
 PubSub.subscribe('shipSunkAI', (msg, data) => {
@@ -67,12 +67,13 @@ PubSub.subscribe('shipSunkPlayer', (msg, data) => {
 async function change(e) {
   const target = e.target
   if (target.matches('#start-btn')) {
-    isGame = true
+    isSelection = true
+    PubSub.publish('dropShips', isSelection)
     DP.changeScene(SC.selectionScene(GB.createBoard(10, 10)), true).then(data => {
       DP.shipToDock(PLAYER_ARR[0].shipDock, data.docks)
     })
   }
-  if(target.matches('#play-btn')){
+  if (target.matches('#play-btn')) {
     window.location.reload()
   }
   if (target.matches('#ready-btn')) {
@@ -86,6 +87,7 @@ async function change(e) {
 
 
 // draggTarget
+
 MAIN_CONT.addEventListener('dragstart', DP.dragShip)
 MAIN_CONT.addEventListener('dragover', DP.onDragShip)
 MAIN_CONT.addEventListener('drop', (e) => {
@@ -93,5 +95,4 @@ MAIN_CONT.addEventListener('drop', (e) => {
   if (e.target.matches('.grids')) {
     DP.dropShip(target)
   }
-
 })
