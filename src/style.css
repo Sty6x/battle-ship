@@ -472,7 +472,7 @@ font-size: 3rem;
   padding: .3em 1em .3em 1em;
   border-radius: 10px;
   cursor: pointer;
-  transition: box-shadow 300ms ease-in;
+  transition: box-shadow 150ms ease-in;
 } 
 
 #play-btn:hover{
