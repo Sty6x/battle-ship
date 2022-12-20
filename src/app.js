@@ -18,19 +18,17 @@ let isGame;
 MAIN_CONT.addEventListener('click', e => {
   const target = e.target;
   change(e)
-  if (isGame) {
-    if (isTurn && target.classList.contains('ship-cell')) {
-      console.log(target)
-      GB.receiveAttack(target)
-      isTurn = false
-    }
-    if (!isTurn) {
-      setTimeout(() => {
-        const AiTarget = PLAYER_ARR[1].attack()
-        GB.receiveAttack(AiTarget)
-        isTurn = true;
-      }, 300)
-    }
+  if (isTurn && target.classList.contains('ship-cell')) {
+    console.log(target)
+    GB.receiveAttack(target)
+    isTurn = false
+  }
+  if (!isTurn) {
+    setTimeout(() => {
+      const AiTarget = PLAYER_ARR[1].attack()
+      GB.receiveAttack(AiTarget)
+      isTurn = true;
+    }, 300)
   }
 })
 
@@ -47,7 +45,7 @@ PLAYER_ARR[1].shipDock.forEach(ships => {
 
 PubSub.subscribe('getWinner', (msg, data) => {
   isGame = false;
-  DP.displayWinner(msg,data)
+  DP.displayWinner(msg, data)
 })
 PubSub.subscribe('shipSunkAI', (msg, data) => {
   PLAYER_ARR[1].removeShip(data)
