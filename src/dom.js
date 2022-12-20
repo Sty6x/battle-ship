@@ -148,15 +148,26 @@ export class Scenes {
     let gameScene = document.createElement('div');
     let playerGrid = document.getElementById('player-grid-cont');
     let playersGridCont = document.createElement('div');
-    let announcer = document.createElement('h1');
-    gameScene.append(announcer, playersGridCont);
+    gameScene.append(playersGridCont);
     playersGridCont.appendChild(playerGrid, aiGrid)
     gameScene.setAttribute('id', 'game-scene')
     playersGridCont.setAttribute('id', 'players-grid-container')
-    announcer.setAttribute('id', 'winner')
-    announcer.classList.add('not-announced')
-
     return { cont: gameScene, gridsCont: playersGridCont }
   }
 
+  gameOver(){
+    let bgEnd = document.createElement('div')
+    bgEnd.setAttribute('id','bg-end')
+    let modalCont = document.createElement('div')
+    modalCont.setAttribute('id','modal-cont')
+    let winner = document.createElement('h1')
+    winner.setAttribute('id','winner')
+    let playBtn = document.createElement('button')
+    playBtn.setAttribute('id','play-btn')
+    bgEnd.appendChild(modalCont)
+    modalCont.append(winner,playBtn)
+
+    let mainContainer = document.getElementById('main-container') 
+    mainContainer.appendChild(bgEnd)
+  }
 }
