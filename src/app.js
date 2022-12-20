@@ -12,17 +12,22 @@ const PLAYER_ARR = GB.getPlayers(Players, Ai, Ships)
 PLAYER_ARR.forEach(player => {
   player.createShipDock()
 })
-const ISTURN = true;
+let isTurn = true;
 
 MAIN_CONT.addEventListener('click', e => {
   const target = e.target;
   change(e)
-  if (ISTURN) {
+  if (isTurn && target.classList.contains('ship-cell')) {
+    console.log(target)
     GB.receiveAttack(target)
-  } else {
+    isTurn = false
+  }
+  setTimeout(() => {
     const AiTarget = PLAYER_ARR[1].attack()
     GB.receiveAttack(AiTarget)
-  }
+    isTurn = true;
+
+  },300)
 })
 
 PLAYER_ARR[0].shipDock.forEach(ships => {
@@ -36,22 +41,18 @@ PLAYER_ARR[1].shipDock.forEach(ships => {
   })
 });
 
-// separate the remove ship of player and AI because
-// when the AI calls the removve ship data and shipSunk is called
-// it removes both the ships regardless of wether or not the ship is destroyed
-// it will only pop() on shipdock that isnt destroyed
-// make a condition in removeShip if the one of them, actually
-// own the ship that was destroyed
 PubSub.subscribe('shipSunkAI', (msg, data) => {
   PLAYER_ARR[1].removeShip(data)
-  console.log({this:PLAYER_ARR[0],dock:PLAYER_ARR[0].shipDock})
-  console.log({this:PLAYER_ARR[1],dock:PLAYER_ARR[1].shipDock})
+  GB.evalPlayers()
+  console.log({ this: PLAYER_ARR[0], dock: PLAYER_ARR[0].shipDock })
+  console.log({ this: PLAYER_ARR[1], dock: PLAYER_ARR[1].shipDock })
 })
 
 PubSub.subscribe('shipSunkPlayer', (msg, data) => {
-  PLAYER_ARR[0].removeship(data)
-  console.log({this:PLAYER_ARR[0],dock:PLAYER_ARR[0].shipDock})
-  console.log({this:PLAYER_ARR[1],dock:PLAYER_ARR[1].shipDock})
+  PLAYER_ARR[0].removeShip(data)
+  GB.evalPlayers()
+  console.log({ this: PLAYER_ARR[0], dock: PLAYER_ARR[0].shipDock })
+  console.log({ this: PLAYER_ARR[1], dock: PLAYER_ARR[1].shipDock })
 })
 async function change(e) {
   const target = e.target

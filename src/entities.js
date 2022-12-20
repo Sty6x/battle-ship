@@ -70,11 +70,11 @@ export class Ai extends Players {
     return { preceedingE: prE }
   }
 
-  async attack() {
-    let playerGrid = document.getElementById('player-grid-container')
-    let grids = Array.from(playerGrid.children)
-    let randomTarget = Math.floor(Math.random() * grids.length)
-    return playerGrid.children[randomTarget]
+  attack() {
+    let playerGrid = document.getElementById('player-grid-cont')
+    let randomTarget = Math.floor(Math.random() * playerGrid.childElementCount)
+    let target = playerGrid.children[randomTarget].firstChild
+    return (target !== null) ? target : playerGrid.children[randomTarget] 
   }
 }
 
@@ -108,9 +108,9 @@ export class Ships {
   isSunk(hit) {
     if (hit == this.cellArr.length) {
       const cellID = this.cellArr[0].id.slice(9)
-      if(cellID == 'AI'){
+      if (cellID == 'AI') {
         PubSub.publish('shipSunkAI', this)
-      }else{
+      } else {
         PubSub.publish('shipSunkPlayer', this)
       }
       return true

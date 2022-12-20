@@ -17,7 +17,7 @@ export class GameBoard {
       PubSub.publish("TargetCell", targetCell)
       return targetCell
     } else {
-      return null
+      return 
     }
   }
   createBoard(gridx, gridy) {
