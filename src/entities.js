@@ -1,4 +1,4 @@
-import  PubSub  from 'pubsub-js'
+import PubSub from 'pubsub-js'
 
 export class Players {
   constructor(ship) {
@@ -9,14 +9,16 @@ export class Players {
   }
   createShipDock() {
     for (let i = 0; i < this.shipArr.length; i++) {
-      this.shipDock.push(new this.ship(this.shipArr[i],this.id))
+      this.shipDock.push(new this.ship(this.shipArr[i], this.id))
     }
-    console.log({this:this,shipDock:this.shipDock})
+    console.log({ this: this, shipDock: this.shipDock })
     PubSub.publish('sendDock', this.shipArr)
     return this.shipDock
   }
   //removeShip should subsribe to isSunk
   removeShip(shipData) {
+
+
     let shipIndex = this.shipDock.indexOf(shipData)
     let spliced = this.shipDock.splice(shipIndex, 1)
     const sunkenShip = spliced.pop()
@@ -40,7 +42,7 @@ export class Ai extends Players {
       }
     }
     return gridContainer
-   }
+  }
 
   async checkGrid(ship, gridcontainer) {
     let numOfGrids = gridcontainer.children.length
@@ -78,13 +80,13 @@ export class Ai extends Players {
 
 
 export class Ships {
-  constructor(cells,id) {
+  constructor(cells, id) {
     this.cellArr = []
     this.hit = 0;
-    this.#createShip(cells,id)
+    this.#createShip(cells, id)
   }
 
-  #createShip(cells,id) {
+  #createShip(cells, id) {
     for (let i = 0; i < cells; i++) {
       let cell = document.createElement('div')
       cell.setAttribute('class', 'ship-cell')
@@ -105,7 +107,12 @@ export class Ships {
   }
   isSunk(hit) {
     if (hit == this.cellArr.length) {
-      PubSub.publish('shipSunk', this)
+      const cellID = this.cellArr[0].id.slice(9)
+      if(cellID == 'AI'){
+        PubSub.publish('shipSunkAI', this)
+      }else{
+        PubSub.publish('shipSunkPlayer', this)
+      }
       return true
     }
     return false
