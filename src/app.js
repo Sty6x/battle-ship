@@ -19,7 +19,7 @@ MAIN_CONT.addEventListener('click', e => {
   const target = e.target;
   console.log(target)
   change(e)
-  if (isTurn && target.classList.contains('ship-cell')) {
+  if (isTurn && target.classList.contains('AI-ship-cell')) {
     console.log(target)
     GB.receiveAttack(target)
     isTurn = false
@@ -62,6 +62,8 @@ PubSub.subscribe('shipSunkPlayer', (msg, data) => {
   console.log({ this: PLAYER_ARR[0], dock: PLAYER_ARR[0].shipDock })
   console.log({ this: PLAYER_ARR[1], dock: PLAYER_ARR[1].shipDock })
 })
+
+
 async function change(e) {
   const target = e.target
   if (target.matches('#start-btn')) {
@@ -81,6 +83,8 @@ async function change(e) {
     })
   }
 }
+
+
 // draggTarget
 MAIN_CONT.addEventListener('dragstart', DP.dragShip)
 MAIN_CONT.addEventListener('dragover', DP.onDragShip)
