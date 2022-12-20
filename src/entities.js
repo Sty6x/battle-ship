@@ -5,10 +5,11 @@ export class Players {
     this.shipDock = []
     this.ship = ship
     this.shipArr = [7, 6, 5, 4, 3, 2]
+    this.id = 'PLAYER'
   }
   createShipDock() {
     for (let i = 0; i < this.shipArr.length; i++) {
-      this.shipDock.push(new this.ship(this.shipArr[i]))
+      this.shipDock.push(new this.ship(this.shipArr[i],this.id))
     }
     console.log({this:this,shipDock:this.shipDock})
     PubSub.publish('sendDock', this.shipArr)
@@ -27,6 +28,7 @@ export class Ai extends Players {
   constructor(ship) {
     super(ship)
     this.shipDock = []
+    this.id = 'AI'
   }
   async placeShip(gridContainer) {
     let grids = Array.from(gridContainer.children)
@@ -38,7 +40,7 @@ export class Ai extends Players {
       }
     }
     return gridContainer
-  }
+   }
 
   async checkGrid(ship, gridcontainer) {
     let numOfGrids = gridcontainer.children.length
@@ -76,17 +78,17 @@ export class Ai extends Players {
 
 
 export class Ships {
-  constructor(cells) {
+  constructor(cells,id) {
     this.cellArr = []
     this.hit = 0;
-    this.#createShip(cells)
+    this.#createShip(cells,id)
   }
 
-  #createShip(cells) {
+  #createShip(cells,id) {
     for (let i = 0; i < cells; i++) {
       let cell = document.createElement('div')
       cell.setAttribute('class', 'ship-cell')
-      cell.setAttribute('id', `ship-${cells}-${i}`)
+      cell.setAttribute('id', `ship-${cells}-${i}-${id}`)
       this.cellArr.push(cell)
     }
   }
