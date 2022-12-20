@@ -13,7 +13,7 @@ PLAYER_ARR.forEach(player => {
   player.createShipDock()
 })
 let isTurn = true;
-let isGame;
+let isGame = true;
 
 MAIN_CONT.addEventListener('click', e => {
   const target = e.target;
@@ -69,6 +69,9 @@ async function change(e) {
     DP.changeScene(SC.selectionScene(GB.createBoard(10, 10)), true).then(data => {
       DP.shipToDock(PLAYER_ARR[0].shipDock, data.docks)
     })
+  }
+  if(target.matches('#play-btn')){
+    window.location.reload()
   }
   if (target.matches('#ready-btn')) {
     let AIGrid = DP.appendGrid(GB.createBoard(10, 10), 'ai-grid-cont')

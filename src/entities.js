@@ -37,6 +37,7 @@ export class Ai extends Players {
     for (let i = 0; i < this.shipDock.length; i++) {
       let { preceedingE } = await this.checkGrid(this.shipDock[i], gridContainer)
       for (let j = 0; j < this.shipDock[i].cellArr.length; j++) {
+        this.shipDock[i].cellArr[j].classList.add('AI-ship-cell')
         let ndxPos = grids.indexOf(preceedingE[j])
         grids[ndxPos].appendChild(this.shipDock[i].cellArr[j])
       }
