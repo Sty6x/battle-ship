@@ -45,6 +45,7 @@ PLAYER_ARR[1].shipDock.forEach(ships => {
 
 PubSub.subscribe('getWinner', (msg, data) => {
   isGame = false;
+  SC.gameOver() 
   DP.displayWinner(msg, data)
 })
 PubSub.subscribe('shipSunkAI', (msg, data) => {
