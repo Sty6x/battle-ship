@@ -19,8 +19,10 @@ export class Display {
   }
 
   dragShip(ev) {
-    ev.dataTransfer.setData('text/plain', ev.target.id)
-    console.log(ev.target)
+    if (ev.target.matches('.dock')) {
+      ev.dataTransfer.setData('text/plain', ev.target.id)
+      console.log(ev.target)
+    }
   }
 
   onDragShip(ev) {
@@ -45,7 +47,7 @@ export class Display {
       tmpCellsArr.push(tmpCells)
       draggedDock.appendChild(tmpCellsArr[i])
       grids[targetNdx + i].appendChild(draggedDock.children[0])
-      grids[targetNdx + i].classList.replace('vacant','occupied')
+      grids[targetNdx + i].classList.replace('vacant', 'occupied')
       draggedDock.setAttribute('class', 'empty-docks')
       draggedDock.setAttribute('draggable', 'false')
     }
@@ -148,7 +150,7 @@ export class Scenes {
     let playersGridCont = document.createElement('div');
     let announcer = document.createElement('h1');
     gameScene.append(announcer, playersGridCont);
-    playersGridCont.appendChild(playerGrid,aiGrid)
+    playersGridCont.appendChild(playerGrid, aiGrid)
     gameScene.setAttribute('id', 'game-scene')
     playersGridCont.setAttribute('id', 'players-grid-container')
     announcer.setAttribute('id', 'winner')
