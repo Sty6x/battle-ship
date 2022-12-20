@@ -398,7 +398,6 @@ font-size: 3rem;
 }
 
 
-
 #ready-btn{
   appearance: none;
   font-size: 2rem;
@@ -415,8 +414,6 @@ font-size: 3rem;
 #ready-btn:hover{
   background-color: rgb(255, 255, 255,.5);
 }
-
-
 
 #game-scene{
   display: flex;

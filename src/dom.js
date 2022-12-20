@@ -38,9 +38,10 @@ export class Display {
     const dataId = event.dataTransfer.getData('text/plain')
     const draggedDock = document.getElementById(dataId)
     const iterateChildren = draggedDock.children.length;
-
+    console.log(draggedDock.parentNode)
     const tmpCellsArr = []
     for (let i = 0; i < iterateChildren; i++) {
+      this.checkDocks(draggedDock.parentNode)
       const tmpCells = document.createElement('div')
       tmpCells.setAttribute('class', 'empty-dock-cell')
       tmpCellsArr.push(tmpCells)
@@ -54,10 +55,23 @@ export class Display {
     return targetNdx
   }
 
+  checkDocks(dockCont) {
+    let docks = Array.from(dockCont.children)
+    let lengthDocks = docks.length
+    let readyBtn = document.getElementById('ready-btn')
+    for(let i = 0; i < docks.length; i++) {
+      if(docks[i].classList.contains('empty-docks')){
+        lengthDocks--
+      }
+    }
+    if(lengthDocks == 0){
+      readyBtn.classList.replace('not-ready','is-ready')
+    }
+  }
   // subscribe to getWinner
   displayWinner(msg, player) {
     let winner = document.getElementById('winner')
-    winner.classList.replace('not-announced','announce')
+    winner.classList.replace('not-announced', 'announce')
     winner.textContent = `Player ${player} Wins!`
   }
   async gateAnim() {
@@ -139,6 +153,7 @@ export class Scenes {
     sideBarShipDock.setAttribute('id', 'side-bar-dock')
     dockContainer.setAttribute('id', 'dock-container')
     rdyBtn.setAttribute('id', 'ready-btn')
+    rdyBtn.classList.add('not-ready')
     return { cont: selectionContainer, docks: dockContainer.children }
   }
 
@@ -155,20 +170,20 @@ export class Scenes {
     return { cont: gameScene, gridsCont: playersGridCont }
   }
 
-  gameOver(){
+  gameOver() {
     let bgEnd = document.createElement('div')
-    bgEnd.setAttribute('id','bg-end')
+    bgEnd.setAttribute('id', 'bg-end')
     let modalCont = document.createElement('div')
-    modalCont.setAttribute('id','modal-cont')
+    modalCont.setAttribute('id', 'modal-cont')
     let winner = document.createElement('h1')
-    winner.setAttribute('id','winner')
+    winner.setAttribute('id', 'winner')
     let playBtn = document.createElement('button')
-    playBtn.setAttribute('id','play-btn')
+    playBtn.setAttribute('id', 'play-btn')
     playBtn.textContent = 'Play Again'
     bgEnd.appendChild(modalCont)
-    modalCont.append(winner,playBtn)
+    modalCont.append(winner, playBtn)
 
-    let mainContainer = document.getElementById('main-container') 
-    mainContainer.insertBefore(bgEnd,mainContainer.firstChild)
+    let mainContainer = document.getElementById('main-container')
+    mainContainer.insertBefore(bgEnd, mainContainer.firstChild)
   }
 }
