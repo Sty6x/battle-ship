@@ -168,6 +168,6 @@ export class Scenes {
     modalCont.append(winner,playBtn)
 
     let mainContainer = document.getElementById('main-container') 
-    mainContainer.appendChild(bgEnd)
+    mainContainer.insertBefore(bgEnd,mainContainer.firstChild)
   }
 }
