@@ -164,6 +164,7 @@ export class Scenes {
     winner.setAttribute('id','winner')
     let playBtn = document.createElement('button')
     playBtn.setAttribute('id','play-btn')
+    playBtn.textContent = 'Play Again'
     bgEnd.appendChild(modalCont)
     modalCont.append(winner,playBtn)
 

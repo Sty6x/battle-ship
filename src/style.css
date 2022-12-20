@@ -398,25 +398,6 @@ font-size: 3rem;
 
 
 
-
-.is-ready{
-
-}
-
-.is-not-ready{
-
-}
-
-#winner{
-  font-weight: bold;
-  font-size: 3rem;
-  color: var(--SS-three);
-  display: block;
-  position: absolute;
-  bottom: 80%;
-}
-
-
 #game-scene{
   display: flex;
   flex-direction: column;
@@ -429,8 +410,33 @@ font-size: 3rem;
   gap: 5em;
 }
 
-bg-end{
+#bg-end{
   display: flex;
   position: absolute;
   background-color: rgb(0, 0,0,.5);
+  min-height: 100%;
+  min-width: 100%;
+  z-index: 9999;
+  justify-content: center;
+  align-items: center;
 }
+
+#modal-cont{
+  display: flex;
+  flex-direction: column;
+  min-height: 250px;
+  min-width: 600;
+  background-color: var(--SS-one);
+  justify-content: center;
+  align-items: center;
+  border-radius: 10px;
+}
+
+#winner{
+  font-weight: bold;
+  font-size: 3rem;
+  color: var(--PN-one);
+  display: block;
+}
+
+
