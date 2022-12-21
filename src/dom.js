@@ -153,6 +153,7 @@ export class Scenes {
     gridCont.setAttribute('id', 'player-grid-cont')
     sideBarShipDock.setAttribute('id', 'side-bar-dock')
     dockContainer.setAttribute('id', 'dock-container')
+    gridHeader.setAttribute('id','selection-header')
     rdyBtn.setAttribute('id', 'ready-btn')
     rdyBtn.classList.add('not-ready')
     rdyBtn.disabled = true;
@@ -161,7 +162,8 @@ export class Scenes {
 
 
   gameScene(aiGrid) {
-    console.log(aiGrid)
+    let gridHeader = document.getElementById('selection-header')
+    gridHeader.remove()
     let gameScene = document.createElement('div');
     let playerGrid = document.getElementById('player-grid-cont');
     let playersGridCont = document.createElement('div');
