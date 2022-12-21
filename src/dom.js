@@ -65,7 +65,8 @@ export class Display {
       }
     }
     if(lengthDocks == 0){
-      readyBtn.classList.replace('not-ready','is-ready')
+      readyBtn.classList.replace('not-ready','is-ready');
+      readyBtn.disabled = false;
     }
   }
   // subscribe to getWinner
@@ -154,6 +155,7 @@ export class Scenes {
     dockContainer.setAttribute('id', 'dock-container')
     rdyBtn.setAttribute('id', 'ready-btn')
     rdyBtn.classList.add('not-ready')
+    rdyBtn.disabled = true;
     return { cont: selectionContainer, docks: dockContainer.children }
   }
 
